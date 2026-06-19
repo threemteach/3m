@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, X, Check, ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye } from 'lucide-react'
+import { ExternalLink, X, Check, ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
 
@@ -82,22 +82,24 @@ export default function ProjectsPage() {
     return () => clearInterval(timer)
   }, [isDesktop])
 
-  const others = projects.filter((_, i) => i !== featuredIndex)
+  const goNext = () => setFeaturedIndex(prev => (prev + 1) % projects.length)
+  const goPrev = () => setFeaturedIndex(prev => (prev - 1 + projects.length) % projects.length)
 
-  function ProjectCard({ project, featured, className = '' }) {
+  function ProjectCard({ project, featured, active, className = '' }) {
+    const isActive = featured || active
     return (
       <motion.button
-        onClick={() => setSelected(project)}
+        onClick={() => featured ? setSelected(project) : setFeaturedIndex(projects.indexOf(project))}
         className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
         style={{
           backgroundImage: `url(${dark ? project.dark : project.light})`,
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
-          border: '1.5px solid var(--accent-fire)',
+          border: isActive ? '2px solid var(--accent-fire)' : '1.5px solid var(--accent-fire)',
           borderRadius: 24,
           aspectRatio: featured ? '16 / 9' : '3 / 4',
-          boxShadow: '0 0 0 0 rgba(195,74,54,0)',
+          boxShadow: isActive ? '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)' : '0 0 0 0 rgba(195,74,54,0)',
           transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         }}
         onMouseEnter={e => {
@@ -106,7 +108,7 @@ export default function ProjectsPage() {
           e.currentTarget.style.backgroundPosition = 'bottom center'
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
+          e.currentTarget.style.boxShadow = isActive ? '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)' : '0 0 0 0 rgba(195,74,54,0)'
           e.currentTarget.style.transform = 'translateY(0)'
           e.currentTarget.style.backgroundPosition = 'top center'
         }}
@@ -153,9 +155,9 @@ export default function ProjectsPage() {
           <p className="section-body mx-auto max-w-2xl">{t('projects.desc')}</p>
         </motion.div>
 
-        {/* Desktop: featured hero + remaining grid */}
+        {/* Desktop: featured hero with nav + all projects grid */}
         <div className="hidden lg:flex flex-col gap-6 md:gap-10">
-          <div className="relative min-h-[200px]">
+          <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={featuredIndex}
@@ -167,17 +169,18 @@ export default function ProjectsPage() {
                 <ProjectCard project={projects[featuredIndex]} featured />
               </motion.div>
             </AnimatePresence>
+
+            <button onClick={goPrev} className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center border-none cursor-pointer transition-all duration-200 hover:scale-110 hover:brightness-125" style={{ background: 'rgba(0,0,0,0.5)', color: '#fff', backdropFilter: 'blur(8px)' }}>
+              <ChevronLeft size={18} />
+            </button>
+            <button onClick={goNext} className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center border-none cursor-pointer transition-all duration-200 hover:scale-110 hover:brightness-125" style={{ background: 'rgba(0,0,0,0.5)', color: '#fff', backdropFilter: 'blur(8px)' }}>
+              <ChevronRight size={18} />
+            </button>
           </div>
-          <div className="grid grid-cols-3 gap-5 md:gap-8">
-            {others.map((p, i) => (
-              <motion.div
-                key={projects.indexOf(p)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <ProjectCard project={p} />
-              </motion.div>
+
+          <div className="grid grid-cols-4 gap-4">
+            {projects.map((p, i) => (
+              <ProjectCard key={i} project={p} active={i === featuredIndex} />
             ))}
           </div>
         </div>
