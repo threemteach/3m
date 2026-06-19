@@ -1,75 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import * as THREE from 'three'
+
+function rand(min, max) { return Math.random() * (max - min) + min }
 
 export default function SplashScreen({ onFinish }) {
   const [show, setShow] = useState(true)
   const [progress, setProgress] = useState(0)
   const ready = useRef(false)
 
-  const threeContainer = useRef(null)
-
-  useEffect(() => {
-    const container = threeContainer.current
-    if (!container) return
-
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100)
-    camera.position.z = 5
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setSize(container.clientWidth, container.clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    container.appendChild(renderer.domElement)
-
-    function makeLayer(count, spread, color, size, opacity) {
-      const geo = new THREE.BufferGeometry()
-      const pos = new Float32Array(count * 3)
-      for (let i = 0; i < count; i++) {
-        pos[i * 3] = (Math.random() - 0.5) * spread
-        pos[i * 3 + 1] = (Math.random() - 0.5) * spread
-        pos[i * 3 + 2] = (Math.random() - 0.5) * spread
-      }
-      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3))
-      const mat = new THREE.PointsMaterial({
-        color, size, transparent: true, opacity,
-        blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  const particles = useMemo(() => {
+    const arr = []
+    for (let i = 0; i < 80; i++) {
+      arr.push({
+        x: rand(0, 100), y: rand(0, 100),
+        size: rand(2, 5), dur: rand(4, 10), delay: -rand(0, 10),
+        dx: rand(-40, 40), dy: rand(-40, 40), color: '#c34a36',
       })
-      const points = new THREE.Points(geo, mat)
-      scene.add(points)
-      return points
     }
-
-    const layer1 = makeLayer(320, 18, '#c34a36', 0.055, 0.6)
-    const layer2 = makeLayer(180, 22, '#7C6FE8', 0.04, 0.4)
-
-    function onResize() {
-      const w = container.clientWidth
-      const h = container.clientHeight
-      camera.aspect = w / h
-      camera.updateProjectionMatrix()
-      renderer.setSize(w, h)
+    for (let i = 0; i < 50; i++) {
+      arr.push({
+        x: rand(0, 100), y: rand(0, 100),
+        size: rand(1.5, 4), dur: rand(5, 12), delay: -rand(0, 12),
+        dx: rand(-30, 30), dy: rand(-30, 30), color: '#7C6FE8',
+      })
     }
-    window.addEventListener('resize', onResize)
-
-    let frame
-    function animate() {
-      frame = requestAnimationFrame(animate)
-      layer1.rotation.y += 0.0006
-      layer1.rotation.x += 0.0002
-      layer2.rotation.y -= 0.0004
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('resize', onResize)
-      renderer.dispose()
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
-      }
-    }
+    return arr
   }, [])
 
   useEffect(() => {
@@ -113,12 +68,41 @@ export default function SplashScreen({ onFinish }) {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden select-none"
           style={{ background: '#0d0a15' }}
         >
-          {/* Three.js particle field */}
-          <div ref={threeContainer} className="absolute inset-0" style={{ zIndex: 0 }} />
+          <style>{`
+            .splash-particle {
+              position: absolute; border-radius: 50%;
+              pointer-events: none; will-change: transform;
+              animation: splash-drift ease-in-out infinite;
+              opacity: 0.3;
+            }
+            @keyframes splash-drift {
+              0%, 100% { transform: translate(0,0) scale(1); opacity: 0.1; }
+              25% { opacity: 0.5; }
+              50% { transform: translate(var(--dx),var(--dy)) scale(1.4); opacity: 0.2; }
+              75% { opacity: 0.5; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .splash-particle { animation: none !important; }
+            }
+          `}</style>
 
-          {/* Center content */}
+          {particles.map((p, i) => (
+            <div
+              key={i}
+              className="splash-particle"
+              style={{
+                left: `${p.x}%`, top: `${p.y}%`,
+                width: p.size, height: p.size,
+                background: p.color,
+                '--dx': `${p.dx}px`, '--dy': `${p.dy}px`,
+                animationDuration: `${p.dur}s`,
+                animationDelay: `${p.delay}s`,
+                boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
+              }}
+            />
+          ))}
+
           <div className="relative flex flex-col items-center gap-0" style={{ zIndex: 1 }}>
-            {/* Big centered logo */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -138,7 +122,6 @@ export default function SplashScreen({ onFinish }) {
             </motion.div>
 
             <div className="flex flex-col items-center gap-3">
-              {/* Tagline */}
               <motion.p
                 className="text-xs md:text-sm tracking-[0.2em] uppercase font-medium"
                 style={{ color: 'rgba(255,255,255,0.35)' }}
@@ -149,7 +132,6 @@ export default function SplashScreen({ onFinish }) {
                 Your Vision, Engineered
               </motion.p>
 
-              {/* Thin progress bar */}
               <motion.div
                 className="w-36 md:w-44"
                 initial={{ opacity: 0 }}
@@ -166,7 +148,6 @@ export default function SplashScreen({ onFinish }) {
                 </div>
               </motion.div>
 
-              {/* Status */}
               <motion.div
                 className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
