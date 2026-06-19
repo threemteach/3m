@@ -1,30 +1,34 @@
 import { useEffect, useRef } from 'react'
 
 export default function CustomCursor() {
+  const dotRef = useRef(null)
   const ringRef = useRef(null)
 
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) return
 
+    const dot = dotRef.current
     const ring = ringRef.current
-    if (!ring) return
+    if (!dot || !ring) return
 
     let mx = window.innerWidth / 2
     let my = window.innerHeight / 2
     let rx = mx
     let ry = my
 
-    ring.style.transform = `translate(${mx - 15}px, ${my - 15}px)`
+    dot.style.transform = `translate(${mx}px, ${my}px)`
+    ring.style.transform = `translate(${mx - 12}px, ${my - 12}px)`
 
     function move(e) {
       mx = e.clientX
       my = e.clientY
+      dot.style.transform = `translate(${mx}px, ${my}px)`
     }
 
     function anim() {
-      rx += (mx - rx) * 0.08
-      ry += (my - ry) * 0.08
-      ring.style.transform = `translate(${rx - 15}px, ${ry - 15}px)`
+      rx += (mx - rx) * 0.1
+      ry += (my - ry) * 0.1
+      ring.style.transform = `translate(${rx - 12}px, ${ry - 12}px)`
       requestAnimationFrame(anim)
     }
 
@@ -38,18 +42,30 @@ export default function CustomCursor() {
   }, [])
 
   return (
-    <div
-      ref={ringRef}
-      className="custom-cursor-ring"
-      style={{
-        position: 'fixed', top: 0, left: 0,
-        width: 30, height: 30,
-        borderRadius: '50%',
-        border: '1px solid rgba(195,74,54,0.2)',
-        pointerEvents: 'none', zIndex: 99998,
-        transform: 'translate(-100px, -100px)',
-        transition: 'width 0.3s, height 0.3s, border-color 0.3s',
-      }}
-    />
+    <>
+      <div
+        ref={dotRef}
+        style={{
+          position: 'fixed', top: 0, left: 0,
+          width: 7, height: 7,
+          borderRadius: '50%',
+          background: 'var(--accent-fire)',
+          pointerEvents: 'none', zIndex: 99999,
+          transform: 'translate(-100px, -100px)',
+        }}
+      />
+      <div
+        ref={ringRef}
+        style={{
+          position: 'fixed', top: 0, left: 0,
+          width: 24, height: 24,
+          borderRadius: '50%',
+          border: '1px solid rgba(255,247,233,0.3)',
+          pointerEvents: 'none', zIndex: 99998,
+          mixBlendMode: 'difference',
+          transform: 'translate(-100px, -100px)',
+        }}
+      />
+    </>
   )
 }
