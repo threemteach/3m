@@ -24,14 +24,14 @@ export default function CTA() {
 
     const msg = `Email: ${form.email}${form.phone ? `\nPhone: ${form.phone}\n\n` : '\n\n'}${form.message}`
     emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      'service_l17n15p',
+      'template_vhq0tqq',
       {
         name: form.name,
         email: form.email,
         message: msg,
       },
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      'xB0arVXO19fOPn-7g',
     ).then(() => {
       setSubmitted(true)
     }).catch(() => {
