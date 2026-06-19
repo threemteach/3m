@@ -48,10 +48,9 @@ export default function CustomCursor() {
         className="custom-cursor-dot"
         style={{
           position: 'fixed', top: 0, left: 0,
-          width: 6, height: 6,
+          width: 8, height: 8,
           borderRadius: '50%',
-          background: 'var(--accent-electric)',
-          boxShadow: '0 0 8px var(--accent-electric)',
+          background: 'var(--accent-fire)',
           pointerEvents: 'none', zIndex: 99999,
           transform: 'translate(-100px, -100px)',
         }}
@@ -61,9 +60,10 @@ export default function CustomCursor() {
         className="custom-cursor-ring"
         style={{
           position: 'fixed', top: 0, left: 0,
-          width: 30, height: 30,
+          width: 28, height: 28,
           borderRadius: '50%',
-          border: '1.5px solid var(--accent-electric)',
+          border: '1.5px solid rgba(195,74,54,0.25)',
+          background: 'rgba(195,74,54,0.04)',
           pointerEvents: 'none', zIndex: 99998,
           transform: 'translate(-100px, -100px)',
         }}
