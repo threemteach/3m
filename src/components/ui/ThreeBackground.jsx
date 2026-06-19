@@ -6,7 +6,7 @@ function rand(min, max) { return Math.random() * (max - min) + min }
 
 export default function ThreeBackground() {
   const particles = useMemo(() =>
-    Array.from({ length: 80 }, (_, i) => ({
+    Array.from({ length: 30 }, (_, i) => ({
       x: rand(0, 100), y: rand(0, 100),
       size: rand(2, 5), color: COLORS[i % 3],
       dur: rand(6, 14), delay: -rand(0, 12),
