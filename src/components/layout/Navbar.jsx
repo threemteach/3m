@@ -151,7 +151,7 @@ export default function Navbar() {
                   className="bg-transparent border-none cursor-pointer text-3xl font-bold transition-colors duration-200"
                   style={{
                     color: active === l.id ? '#c34a36' : '#FFF7E9',
-                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontFamily: lang === 'ar' ? "'Cairo', sans-serif" : "'Space Grotesk', sans-serif",
                   }}
                 >
                   {l.label}

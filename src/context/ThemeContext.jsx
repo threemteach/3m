@@ -17,8 +17,7 @@ function setCookie(name, value) {
 export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
     const saved = getCookie('theme')
-    if (saved) return saved === 'dark'
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
+    return saved ? saved === 'dark' : false
   })
 
   useEffect(() => {
