@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
 import ScrollProgress from './components/ui/ScrollProgress.jsx'
 import BackToTop from './components/ui/BackToTop.jsx'
+import CustomCursor from './components/ui/CustomCursor.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
 import Marquee from './components/sections/Marquee.jsx'
@@ -52,6 +53,7 @@ function App() {
   return (
     <>
       {!splashDone && <SplashScreen onFinish={handleSplashFinish} />}
+      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <ScrollToTop />
