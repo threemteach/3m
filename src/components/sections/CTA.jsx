@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 export default function CTA() {
@@ -20,12 +21,22 @@ export default function CTA() {
       return
     }
     setError(false)
-    const subject = encodeURIComponent(`New project inquiry from ${form.name}`)
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
-    )
-    window.location.href = `mailto:hello@triple-m.dev?subject=${subject}&body=${body}`
-    setSubmitted(true)
+
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+        message: form.message,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+    ).then(() => {
+      setSubmitted(true)
+    }).catch(() => {
+      setError(true)
+    })
   }
 
   return (
