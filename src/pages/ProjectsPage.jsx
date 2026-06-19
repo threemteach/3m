@@ -150,8 +150,22 @@ export default function ProjectsPage() {
 
 function ProjectModal({ project, onClose, lang, isRTL, dark }) {
   useEffect(() => {
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
     document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = '' }
+    document.body.style.width = '100%'
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+      document.body.style.width = ''
+      window.scrollTo(0, scrollY)
+    }
   }, [])
 
   return (
@@ -161,7 +175,7 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto py-8 md:py-16 px-4"
-      style={{ background: 'rgba(8, 11, 20, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+      style={{ background: 'rgba(8, 11, 20, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', overscrollBehavior: 'contain' }}
       onClick={onClose}
     >
       <motion.div
@@ -170,7 +184,7 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
         exit={{ opacity: 0, y: 40, scale: 0.97 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-4xl overflow-hidden"
+        className="relative w-full max-w-4xl"
         style={{ background: 'var(--bg-primary)', borderRadius: 24, border: '1px solid var(--border)' }}
       >
         <button
