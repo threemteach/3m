@@ -78,7 +78,7 @@ export default function ProjectsPage() {
           <p className="section-body mx-auto">{t('projects.desc')}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {projects.map((p, i) => (
             <motion.button
               key={i}
@@ -90,7 +90,7 @@ export default function ProjectsPage() {
               style={{
                 background: 'var(--bg-secondary)',
                 border: '2px solid var(--border)',
-                aspectRatio: '16 / 11',
+                aspectRatio: '4 / 3',
               }}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
