@@ -95,26 +95,26 @@ export default function ProjectsPage() {
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
-          border: featured ? '3px solid var(--accent-fire)' : '1.5px solid transparent',
+          border: featured ? '1.5px solid transparent' : active ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
           borderRadius: 24,
           aspectRatio: featured ? '16 / 9' : '3 / 4',
-          boxShadow: featured ? '0 0 0 4px rgba(195,74,54,0.12), 0 0 30px rgba(195,74,54,0.15)' : 'none',
+          boxShadow: featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none',
           transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.boxShadow = featured ? '0 0 0 6px rgba(195,74,54,0.25), 0 0 60px rgba(195,74,54,0.3)' : '0 0 0 3px rgba(195,74,54,0.12), 0 16px 48px -8px rgba(0,0,0,0.3)'
+          e.currentTarget.style.boxShadow = featured ? '0 0 0 3px rgba(195,74,54,0.1), 0 16px 48px -8px rgba(0,0,0,0.3)' : active ? '0 0 0 5px rgba(195,74,54,0.2), 0 0 30px rgba(195,74,54,0.15)' : '0 0 0 3px rgba(195,74,54,0.1), 0 16px 48px -8px rgba(0,0,0,0.3)'
           e.currentTarget.style.transform = 'translateY(-8px)'
           e.currentTarget.style.backgroundPosition = 'bottom center'
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.boxShadow = featured ? '0 0 0 4px rgba(195,74,54,0.12), 0 0 30px rgba(195,74,54,0.15)' : 'none'
+          e.currentTarget.style.boxShadow = featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none'
           e.currentTarget.style.transform = 'translateY(0)'
           e.currentTarget.style.backgroundPosition = 'top center'
         }}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
-        {featured && (
-          <div className="absolute inset-0 rounded-[24px] pointer-events-none z-[1]" style={{ animation: 'borderPulse 2.5s ease-in-out infinite', boxShadow: 'inherit', border: '3px solid var(--accent-fire)' }} />
+        {active && !featured && (
+          <div className="absolute inset-0 rounded-[24px] pointer-events-none z-[1]" style={{ animation: 'borderPulse 2.5s ease-in-out infinite', border: '2px solid var(--accent-fire)' }} />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
         <div className={`absolute ${featured ? 'top-4 md:top-7 left-4 md:left-7' : 'top-3 left-3 md:top-5 md:left-5'}`}>
@@ -142,8 +142,8 @@ export default function ProjectsPage() {
         </div>
       <style>{`
 @keyframes borderPulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(195,74,54,0.12), 0 0 30px rgba(195,74,54,0.15); }
-  50% { box-shadow: 0 0 0 8px rgba(195,74,54,0.2), 0 0 50px rgba(195,74,54,0.25); }
+  0%, 100% { box-shadow: 0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1); }
+  50% { box-shadow: 0 0 0 5px rgba(195,74,54,0.2), 0 0 35px rgba(195,74,54,0.18); }
 }
 `}</style>
       </motion.button>
