@@ -90,7 +90,7 @@ export default function ProjectsPage() {
               style={{
                 background: 'var(--bg-secondary)',
                 border: '2px solid var(--border)',
-                aspectRatio: '4 / 3',
+                aspectRatio: '3 / 4',
               }}
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
