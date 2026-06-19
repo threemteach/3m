@@ -85,7 +85,7 @@ export default function ProjectsPage() {
   const goNext = () => setFeaturedIndex(prev => (prev + 1) % projects.length)
   const goPrev = () => setFeaturedIndex(prev => (prev - 1 + projects.length) % projects.length)
 
-  function ProjectCard({ project, featured, active, className = '' }) {
+  function ProjectCard({ project, featured, active, alwaysBorder, className = '' }) {
     return (
       <motion.button
         onClick={() => featured ? setSelected(project) : setFeaturedIndex(projects.indexOf(project))}
@@ -108,7 +108,7 @@ export default function ProjectsPage() {
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
-          border: featured ? '1.5px solid var(--accent-fire)' : active && !featured ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
+          border: alwaysBorder ? '1.5px solid var(--accent-fire)' : featured ? '1.5px solid var(--accent-fire)' : active && !featured ? '2px solid var(--accent-fire)' : '1.5px solid transparent',
           borderRadius: 24,
           aspectRatio: featured ? '16 / 9' : '3 / 4',
           boxShadow: featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none',
@@ -195,7 +195,7 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
-              <ProjectCard project={p} />
+              <ProjectCard project={p} alwaysBorder />
             </motion.div>
           ))}
         </div>
