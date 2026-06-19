@@ -50,8 +50,6 @@ export default function Navbar() {
             className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill"
             style={{
               background: 'rgba(13, 10, 21, 0.35)',
-              backdropFilter: 'blur(28px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(28px) saturate(180%)',
               border: '1px solid rgba(255, 247, 233, 0.06)',
               opacity: 0.85,
               boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
@@ -132,7 +130,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[60] flex flex-col navbar-drawer"
-            style={{ background: 'rgba(13, 10, 21, 0.6)', backdropFilter: 'blur(28px) saturate(180%)', WebkitBackdropFilter: 'blur(28px) saturate(180%)' }}
+            style={{ background: 'rgba(13, 10, 21, 0.6)' }}
           >
             <div className="flex items-center justify-between h-16 px-6">
               <a href="/" className="flex items-center no-underline">
