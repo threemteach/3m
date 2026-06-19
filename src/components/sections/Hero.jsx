@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Sparkles, Zap, Globe, Code2, Smartphone, ShoppingBag, Palette, ShoppingCart } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Sparkles, Zap, Globe, Code2, Smartphone, ShoppingBag, Palette } from 'lucide-react'
 import Button from '../ui/Button.jsx'
 import ThreeBackground from '../ui/ThreeBackground.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
@@ -228,33 +228,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-mobile-stats hero-anim-fade-up-50" style={{ animationDelay: '0.7s' }}>
-        <div className="hero-mobile-stats-inner">
-          <div className="hero-mobile-stat">
-            <span className="hero-mobile-stat-value" style={{ color: 'var(--accent-fire)', fontSize: 12 }}>
-              <Globe size={12} /> {lang === 'en' ? 'Web' : 'ويب'}
-            </span>
-          </div>
-          <div className="hero-mobile-stat-divider" />
-          <div className="hero-mobile-stat">
-            <span className="hero-mobile-stat-value" style={{ color: 'var(--accent-fire)', fontSize: 12 }}>
-              <Smartphone size={12} /> {lang === 'en' ? 'Mobile' : 'جوال'}
-            </span>
-          </div>
-          <div className="hero-mobile-stat-divider" />
-          <div className="hero-mobile-stat">
-            <span className="hero-mobile-stat-value" style={{ color: 'var(--accent-fire)', fontSize: 12 }}>
-              <Palette size={12} /> {lang === 'en' ? 'UI/UX' : 'تصميم'}
-            </span>
-          </div>
-          <div className="hero-mobile-stat-divider" />
-          <div className="hero-mobile-stat">
-            <span className="hero-mobile-stat-value" style={{ color: 'var(--accent-fire)', fontSize: 12 }}>
-              <ShoppingCart size={12} /> {lang === 'en' ? 'Shopify' : 'متاجر'}
-            </span>
-          </div>
-        </div>
-      </div>
+
 
     </section>
   )

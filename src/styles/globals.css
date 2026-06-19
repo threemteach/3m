@@ -900,69 +900,6 @@ body {
   letter-spacing: 0;
 }
 
-/* ─── Mobile Stats Bar ─── */
-.hero-mobile-stats {
-  position: relative;
-  z-index: 10;
-  padding: 0 16px 16px;
-}
-
-.hero-mobile-stats-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 14px 20px;
-  border-radius: 20px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-}
-
-.hero-mobile-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  flex: 1;
-  min-width: 0;
-}
-
-.hero-mobile-stat-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.hero-mobile-stat-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.rtl .hero-mobile-stat-label {
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-.hero-mobile-stat-rating {
-  font-size: 14px;
-  color: #F59E0B;
-  letter-spacing: 1px;
-}
-
-.hero-mobile-stat-divider {
-  width: 1px;
-  height: 28px;
-  background: var(--border);
-  flex-shrink: 0;
-  margin: 0 4px;
-}
 
 
 
@@ -1052,24 +989,7 @@ body {
     font-size: 12px;
   }
 
-  .hero-mobile-stats {
-    padding: 0 32px 24px;
-  }
 
-  .hero-mobile-stats-inner {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 16px 28px;
-    border-radius: 24px;
-  }
-
-  .hero-mobile-stat-value {
-    font-size: 22px;
-  }
-
-  .hero-mobile-stat-label {
-    font-size: 11px;
-  }
 
 }
 
@@ -1127,9 +1047,7 @@ body {
   }
 
   /* Hide mobile stats on desktop — using floating cards instead */
-  .hero-mobile-stats {
-    display: none;
-  }
+
 
 }
 
@@ -1193,22 +1111,7 @@ body {
     padding: 5px 10px;
   }
 
-  .hero-mobile-stats-inner {
-    padding: 12px 12px;
-    gap: 0;
-  }
 
-  .hero-mobile-stat-value {
-    font-size: 15px;
-  }
-
-  .hero-mobile-stat-label {
-    font-size: 9px;
-  }
-
-  .hero-mobile-stat-divider {
-    height: 22px;
-  }
 }
 
 /* ═══════════════════════════════════════════════
