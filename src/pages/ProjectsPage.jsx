@@ -93,11 +93,11 @@ export default function ProjectsPage() {
                 borderRadius: 20,
                 aspectRatio: '3 / 4',
                 boxShadow: '0 0 0 0 rgba(195,74,54,0)',
-                transition: 'box-shadow 0.4s ease, transform 0.4s ease',
+                transition: 'box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.15), 0 12px 40px rgba(195,74,54,0.1)'
-                e.currentTarget.style.transform = 'translateY(-4px)'
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.12), 0 16px 48px rgba(195,74,54,0.08)'
+                e.currentTarget.style.transform = 'translateY(-6px)'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
@@ -109,12 +109,14 @@ export default function ProjectsPage() {
                 <img
                   src={dark ? p.dark : p.light}
                   alt={p.alt}
-                  className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-[1200ms] ease-out"
+                  style={{ objectPosition: 'center 0%' }}
+                  onMouseEnter={e => e.currentTarget.style.objectPosition = 'center 100%'}
+                  onMouseLeave={e => e.currentTarget.style.objectPosition = 'center 0%'}
                 />
               </div>
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, rgba(195,74,54,0.15), rgba(74,58,140,0.15))' }} />
 
               <div className="absolute top-3 left-3 md:top-4 md:left-4">
                 <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1.5 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
