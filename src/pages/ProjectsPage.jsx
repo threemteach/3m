@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, X, Check, ArrowUpRight, Layers, Palette, Code, Gauge, Smartphone } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
@@ -86,12 +86,14 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="group relative w-full text-left border-none cursor-pointer rounded-3xl overflow-hidden"
+              className="group relative w-full text-left border-none cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden"
               style={{
                 background: 'var(--bg-secondary)',
                 border: '2px solid var(--border)',
                 aspectRatio: '4 / 3',
               }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
               <img
@@ -106,9 +108,9 @@ export default function ProjectsPage() {
                   {p.tag}
                 </span>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{p.name}</h3>
-                <p className="text-sm text-white/70 line-clamp-1">{p.description}</p>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <h3 className="text-base md:text-2xl font-bold text-white mb-0.5 md:mb-1">{p.name}</h3>
+                <p className="text-xs md:text-sm text-white/70 line-clamp-1">{p.description}</p>
               </div>
               <div className="absolute bottom-5 md:bottom-6 right-5 md:right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                 <ArrowUpRight size={18} className="text-white" />
@@ -128,6 +130,11 @@ export default function ProjectsPage() {
 }
 
 function ProjectModal({ project, onClose, lang, isRTL, dark }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -155,7 +162,7 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
           <X size={16} />
         </button>
 
-        <div className="relative h-56 md:h-72 overflow-hidden">
+        <div className="relative h-48 md:h-72 overflow-hidden">
           <img
             src={dark ? project.dark : project.light}
             alt={project.alt}
@@ -170,7 +177,7 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
           </div>
         </div>
 
-        <div className="p-6 md:p-8 pt-4" dir={isRTL ? 'rtl' : 'ltr'}>
+        <div className="p-5 md:p-8 pt-3 md:pt-4" dir={isRTL ? 'rtl' : 'ltr'}>
           <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
             {project.description}
           </p>
@@ -179,10 +186,10 @@ function ProjectModal({ project, onClose, lang, isRTL, dark }) {
             <h4 className="text-xs font-semibold tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>
               {lang === 'en' ? 'What We Did' : 'ما قمنا به'}
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-1.5">
               {project.whatWeDid.map((item, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-sm px-4 py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
-                  <Check size={14} className="shrink-0" style={{ color: 'var(--accent-fire)' }} />
+                <div key={i} className="flex items-center gap-2.5 text-xs md:text-sm px-3 md:px-4 py-2.5 md:py-3 rounded-xl" style={{ background: 'var(--bg-secondary)' }}>
+                  <Check size={12} className="shrink-0 md:w-[14px]" style={{ color: 'var(--accent-fire)' }} />
                   <span style={{ color: 'var(--text-secondary)' }}>{item}</span>
                 </div>
               ))}
