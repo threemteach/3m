@@ -8,7 +8,7 @@ import { useTheme } from '../../context/ThemeContext.jsx'
 const projects = [
   { name: 'Rent Go', url: 'https://rent-go.ae/', light: '/projects/rent_and_go_light.webp', dark: '/projects/rent_and_go_dark.webp', alt: 'Rent Go car rental booking platform homepage' },
   { name: 'Watan Alex', url: 'https://watan-alex.netlify.app/', light: '/projects/watan_alex_light.webp', dark: '/projects/watan_alex_dark.webp', alt: 'Watan Alex real estate property listings website' },
-  { name: 'Royal CCR', url: 'https://royalccr.ae/', light: '/projects/royal_ccr.webp', dark: '/projects/royal_ccr.webp', alt: 'Royal CCR construction and contracting services site' },
+  { name: 'Royal CCR', url: 'https://royal-ccrs.vercel.app/', light: '/projects/royal_ccr.webp', dark: '/projects/royal_ccr.webp', alt: 'Royal CCR construction and contracting services site' },
   { name: 'Egyfield', url: 'https://egyfield.com/', light: '/projects/egyfield_light.webp', dark: '/projects/egyfield_dark.webp', alt: 'Egyfield oil and gas industry services website' },
 ]
 
