@@ -223,10 +223,7 @@ body {
   isolation: isolate;
 }
 
-section[id]:not(.hero-section) {
-  content-visibility: auto;
-  contain-intrinsic-size: 500px;
-}
+
 
 /* ─── Background Effects ─── */
 .hero-bg-effects {
