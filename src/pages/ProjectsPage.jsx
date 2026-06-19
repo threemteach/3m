@@ -105,10 +105,9 @@ export default function ProjectsPage() {
           boxShadow: active && !featured
             ? '0 0 0 5px rgba(195,74,54,0.2), 0 0 35px rgba(195,74,54,0.18)'
             : '0 0 0 3px rgba(195,74,54,0.1), 0 16px 48px -8px rgba(0,0,0,0.2)',
-          backgroundPosition: 'bottom center',
-          transition: { duration: 1.2, ease: 'easeOut' },
         }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
+        onMouseEnter={e => { e.currentTarget.style.backgroundPosition = 'bottom center' }}
+        onMouseLeave={e => { e.currentTarget.style.backgroundPosition = 'top center' }}
         style={{
           backgroundImage: `url(${dark ? project.dark : project.light})`,
           backgroundSize: 'cover',
@@ -118,6 +117,7 @@ export default function ProjectsPage() {
           borderRadius: 24,
           aspectRatio: featured ? '16 / 9' : '3 / 4',
           boxShadow: featured ? 'none' : active ? '0 0 0 3px rgba(195,74,54,0.12), 0 0 20px rgba(195,74,54,0.1)' : 'none',
+          transition: 'background-position 1.5s ease, box-shadow 0.4s ease, transform 0.4s ease',
         }}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
