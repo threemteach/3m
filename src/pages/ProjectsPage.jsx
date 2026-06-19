@@ -63,7 +63,82 @@ export default function ProjectsPage() {
   const { t, lang } = useTranslation()
   const { dark } = useTheme()
   const [selected, setSelected] = useState(null)
+  const [featuredIndex, setFeaturedIndex] = useState(0)
+  const [isDesktop, setIsDesktop] = useState(false)
   const isRTL = lang === 'ar'
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  useEffect(() => {
+    if (!isDesktop) return
+    const timer = setInterval(() => {
+      setFeaturedIndex(prev => (prev + 1) % projects.length)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [isDesktop])
+
+  const others = projects.filter((_, i) => i !== featuredIndex)
+
+  function ProjectCard({ project, featured, className = '' }) {
+    return (
+      <motion.button
+        onClick={() => setSelected(project)}
+        className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
+        style={{
+          backgroundImage: `url(${dark ? project.dark : project.light})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'top center',
+          backgroundRepeat: 'no-repeat',
+          border: '1.5px solid var(--accent-fire)',
+          borderRadius: 24,
+          aspectRatio: featured ? '16 / 9' : '3 / 4',
+          boxShadow: '0 0 0 0 rgba(195,74,54,0)',
+          transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)'
+          e.currentTarget.style.transform = 'translateY(-8px)'
+          e.currentTarget.style.backgroundPosition = 'bottom center'
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
+          e.currentTarget.style.transform = 'translateY(0)'
+          e.currentTarget.style.backgroundPosition = 'top center'
+        }}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+        <div className={`absolute ${featured ? 'top-4 md:top-7 left-4 md:left-7' : 'top-3 left-3 md:top-5 md:left-5'}`}>
+          <span className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold uppercase tracking-widest px-3 py-1.5 md:px-5 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
+            {featured && <Eye size={12} />}
+            {project.tag}
+          </span>
+        </div>
+        <div className={`absolute ${featured ? 'top-4 md:top-7 right-4 md:right-7' : 'top-3 right-3 md:top-5 md:right-5'} opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0`}>
+          <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            <Eye size={15} className="text-white" />
+          </div>
+        </div>
+        <div className={`absolute bottom-0 left-0 right-0 ${featured ? 'p-6 md:p-10' : 'p-5 md:p-7'}`} style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+          {featured && (
+            <span className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-white/40 mb-1 md:mb-2 block">{lang === 'en' ? 'Featured Project' : 'مشروع مميز'}</span>
+          )}
+          <h3 className={`font-bold text-white mb-1 ${featured ? 'text-2xl md:text-4xl' : 'text-lg md:text-2xl'}`}>{project.name}</h3>
+          <p className={`text-white/60 line-clamp-1 ${featured ? 'text-xs md:text-base' : 'text-[11px] md:text-sm'}`}>{project.description}</p>
+          <div className={`flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 ${featured ? 'mt-4 md:mt-6' : 'mt-3 md:mt-4'}`}>
+            <span className={`text-[10px] md:text-xs font-medium text-white flex items-center gap-1.5 px-3.5 py-1.5 rounded-full ${featured ? 'md:px-5 md:py-2.5' : 'md:px-4 md:py-2'}`} style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              <ArrowUpRight size={12} /> {lang === 'en' ? 'View Project' : 'عرض المشروع'}
+            </span>
+          </div>
+        </div>
+      </motion.button>
+    )
+  }
 
   return (
     <div className="min-h-screen pt-28 pb-24 px-6" style={{ background: 'var(--bg-primary)' }}>
@@ -78,113 +153,47 @@ export default function ProjectsPage() {
           <p className="section-body mx-auto max-w-2xl">{t('projects.desc')}</p>
         </motion.div>
 
-        <div className="flex flex-col gap-6 md:gap-10">
-          <motion.button
-            onClick={() => setSelected(projects[0])}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="group relative w-full text-left cursor-pointer overflow-hidden"
-            style={{
-              backgroundImage: `url(${dark ? projects[0].dark : projects[0].light})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'top center',
-              backgroundRepeat: 'no-repeat',
-              border: '1.5px solid var(--accent-fire)',
-              borderRadius: 24,
-              aspectRatio: '16 / 9',
-              boxShadow: '0 0 0 0 rgba(195,74,54,0)',
-              transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)'
-              e.currentTarget.style.transform = 'translateY(-8px)'
-              e.currentTarget.style.backgroundPosition = 'bottom center'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.backgroundPosition = 'top center'
-            }}
-            dir={isRTL ? 'rtl' : 'ltr'}
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-            <div className="absolute top-4 md:top-7 left-4 md:left-7">
-              <span className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold uppercase tracking-widest px-3 py-1.5 md:px-5 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
-                <Eye size={12} /> {projects[0].tag}
-              </span>
-            </div>
-            <div className="absolute top-4 md:top-7 right-4 md:right-7 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0">
-              <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                <Eye size={15} className="text-white" />
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
-              <span className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-white/40 mb-1 md:mb-2 block">{lang === 'en' ? 'Featured Project' : 'مشروع مميز'}</span>
-              <h3 className="text-2xl md:text-4xl font-bold text-white mb-1">{projects[0].name}</h3>
-              <p className="text-xs md:text-base text-white/60 line-clamp-1">{projects[0].description}</p>
-              <div className="mt-4 md:mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0">
-                <span className="text-[10px] md:text-xs font-medium text-white flex items-center gap-1.5 px-3.5 py-1.5 md:px-5 md:py-2.5 rounded-full" style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                  <ArrowUpRight size={12} /> {lang === 'en' ? 'View Project' : 'عرض المشروع'}
-                </span>
-              </div>
-            </div>
-          </motion.button>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-            {projects.slice(1).map((p, i) => (
-              <motion.button
-                key={i}
-                onClick={() => setSelected(p)}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.12 + 0.15 }}
-                className="group relative w-full text-left cursor-pointer overflow-hidden"
-                style={{
-                  backgroundImage: `url(${dark ? p.dark : p.light})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'top center',
-                  backgroundRepeat: 'no-repeat',
-                  border: '1.5px solid var(--accent-fire)',
-                  borderRadius: 24,
-                  aspectRatio: '3 / 4',
-                  boxShadow: '0 0 0 0 rgba(195,74,54,0)',
-                  transition: 'box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-position 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(195,74,54,0.15), 0 20px 60px -10px rgba(195,74,54,0.15)'
-                  e.currentTarget.style.transform = 'translateY(-8px)'
-                  e.currentTarget.style.backgroundPosition = 'bottom center'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.boxShadow = '0 0 0 0 rgba(195,74,54,0)'
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.backgroundPosition = 'top center'
-                }}
-                dir={isRTL ? 'rtl' : 'ltr'}
+        {/* Desktop: featured hero + remaining grid */}
+        <div className="hidden lg:flex flex-col gap-6 md:gap-10">
+          <div className="relative min-h-[200px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={featuredIndex}
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.45, ease: 'easeInOut' }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                <div className="absolute top-3 left-3 md:top-5 md:left-5">
-                  <span className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
-                    {p.tag}
-                  </span>
-                </div>
-                <div className="absolute top-3 right-3 md:top-5 md:right-5 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0">
-                  <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                    <Eye size={15} className="text-white" />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
-                  <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{p.name}</h3>
-                  <p className="text-[11px] md:text-sm text-white/60 line-clamp-1">{p.description}</p>
-                  <div className="mt-3 md:mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0">
-                    <span className="text-[10px] md:text-xs font-medium text-white flex items-center gap-1.5 px-3.5 py-1.5 md:px-4 md:py-2 rounded-full" style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                      <ArrowUpRight size={12} /> {lang === 'en' ? 'View Project' : 'عرض المشروع'}
-                    </span>
-                  </div>
-                </div>
-              </motion.button>
+                <ProjectCard project={projects[featuredIndex]} featured />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <div className="grid grid-cols-3 gap-5 md:gap-8">
+            {others.map((p, i) => (
+              <motion.div
+                key={projects.indexOf(p)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <ProjectCard project={p} />
+              </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile: simple equal grid */}
+        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8">
+          {projects.map((p, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <ProjectCard project={p} />
+            </motion.div>
+          ))}
         </div>
       </div>
 
