@@ -256,12 +256,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-scroll-indicator hero-anim-fade" style={{ animationDelay: '1.5s' }}>
-        <div className="hero-scroll-mouse hero-anim-bounce">
-          <div className="hero-scroll-dot" />
-        </div>
-        <span className="hero-scroll-text">{lang === 'en' ? 'Scroll' : 'اسحب'}</span>
-      </div>
     </section>
   )
 }

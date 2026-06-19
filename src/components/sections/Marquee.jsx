@@ -7,7 +7,7 @@ export default function Marquee() {
   const items = t('marquee')
 
   return (
-    <Reveal variant="fadeUp">
+    <Reveal variant="fadeUp" margin="45%">
       <div className="py-6 overflow-hidden border-y border-[var(--border)] marquee-wrapper" style={{ background: 'var(--bg-secondary)' }}>
         <div className="flex gap-0 marquee-track">
           <div className="flex shrink-0 gap-0 marquee-content-left">
