@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Menu, X, ExternalLink } from 'lucide-react'
 import ThemeToggle from '../ui/ThemeToggle.jsx'
 import LangToggle from '../ui/LangToggle.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
@@ -15,6 +15,8 @@ export default function Navbar() {
   const active = useScrollSpy(sectionIds, 120)
   const { t, lang } = useTranslation()
   const navigate = useNavigate()
+  const location = useLocation()
+  const isProjectsPage = location.pathname === '/projects'
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 50) }
@@ -27,19 +29,31 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  function scrollTo(id) {
+  const scrollTo = useCallback((id) => {
     setOpen(false)
-    if (id === 'work') { navigate('/projects'); return }
+    if (id === 'work') {
+      if (!isProjectsPage) navigate('/projects')
+      return
+    }
+    if (isProjectsPage) {
+      navigate('/')
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      }))
+      return
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
+  }, [isProjectsPage, navigate])
+
+  const effectiveActive = isProjectsPage ? 'work' : active
 
   const links = [
-    { id: 'services', label: t('nav.services') },
-    { id: 'about', label: t('nav.about') },
-    { id: 'work', label: t('nav.work') },
-    { id: 'process', label: t('nav.process') },
-    { id: 'team', label: t('nav.team') },
-    { id: 'contact', label: t('nav.contact') },
+    { id: 'services', label: t('nav.services'), page: false },
+    { id: 'about', label: t('nav.about'), page: false },
+    { id: 'work', label: t('nav.work'), page: true },
+    { id: 'process', label: t('nav.process'), page: false },
+    { id: 'team', label: t('nav.team'), page: false },
+    { id: 'contact', label: t('nav.contact'), page: false },
   ]
 
   return (
@@ -63,37 +77,39 @@ export default function Navbar() {
               <img src="/logos/Orange.svg" alt="triple m" className="h-7 w-auto" />
             </a>
 
-            <div className="hidden md:flex items-center gap-0">
-              {links.map((l, i) => (
-                <div key={l.id} className="flex items-center gap-0">
-                  {i > 0 && (
-                    <span className="mx-3 text-[10px]" style={{ color: 'rgba(255, 247, 233, 0.2)' }}>●</span>
-                  )}
-                  <button
-                  onClick={() => scrollTo(l.id)}
-                  className="group bg-transparent border-none cursor-pointer transition-colors duration-200"
-                  style={{
-                    color: active === l.id ? '#c34a36' : 'rgba(255, 247, 233, 0.65)',
-                    fontSize: active === l.id ? '14px' : '13px',
-                    fontWeight: active === l.id ? 700 : 500,
-                    letterSpacing: '0.03em',
-                  }}
-                  onMouseEnter={e => { if (active !== l.id) e.target.style.color = '#FFF7E9' }}
-                  onMouseLeave={e => { if (active !== l.id) e.target.style.color = 'rgba(255, 247, 233, 0.65)' }}
-                >
-                  <span className="relative">
-                    {l.label}
-                    <span
-                      className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 ${
-                        active === l.id ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
-                      style={{ background: '#c34a36' }}
-                    />
-                  </span>
-                </button>
-                </div>
-              ))}
-            </div>
+              <div className="hidden md:flex items-center gap-0">
+                {links.map((l, i) => (
+                  <div key={l.id} className="flex items-center gap-0">
+                    {i > 0 && (
+                      <span className="mx-3 text-[10px]" style={{ color: 'rgba(255, 247, 233, 0.2)' }}>●</span>
+                    )}
+                    <button
+                    onClick={() => scrollTo(l.id)}
+                    className="group bg-transparent border-none cursor-pointer transition-colors duration-200"
+                    style={{
+                      color: effectiveActive === l.id ? '#c34a36' : 'rgba(255, 247, 233, 0.65)',
+                      fontSize: effectiveActive === l.id ? '14px' : '13px',
+                      fontWeight: effectiveActive === l.id ? 700 : 500,
+                      letterSpacing: '0.03em',
+                      opacity: isProjectsPage && !l.page ? 0.5 : 1,
+                    }}
+                    onMouseEnter={e => { if (effectiveActive !== l.id) e.target.style.color = '#FFF7E9' }}
+                    onMouseLeave={e => { if (effectiveActive !== l.id) e.target.style.color = 'rgba(255, 247, 233, 0.65)' }}
+                  >
+                    <span className="relative inline-flex items-center gap-1">
+                      {l.label}
+                      {l.page && <ExternalLink size={10} className="opacity-60" />}
+                      <span
+                        className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 ${
+                          effectiveActive === l.id ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
+                        style={{ background: '#c34a36' }}
+                      />
+                    </span>
+                  </button>
+                  </div>
+                ))}
+              </div>
 
             <div className="hidden md:flex items-center gap-2">
               <ThemeToggle />
@@ -153,14 +169,17 @@ export default function Navbar() {
                   onClick={() => scrollTo(l.id)}
                   className="bg-transparent border-none cursor-pointer text-3xl font-bold transition-colors duration-200"
                   style={{
-                    color: active === l.id ? '#c34a36' : '#FFF7E9',
+                    color: effectiveActive === l.id ? '#c34a36' : '#FFF7E9',
                     fontFamily: lang === 'ar' ? "'Cairo', sans-serif" : "'Space Grotesk', sans-serif",
+                    opacity: isProjectsPage && !l.page ? 0.4 : 1,
                   }}
                 >
-                  {l.label}
+                  <span className="inline-flex items-center gap-2">
+                    {l.label}
+                    {l.page && <ExternalLink size={16} className="opacity-60" />}
+                  </span>
                 </motion.button>
               ))}
-
             </div>
           </motion.div>
         )}
