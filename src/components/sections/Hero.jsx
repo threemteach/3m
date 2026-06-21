@@ -160,7 +160,7 @@ export default function Hero() {
             </p>
 
             <div className="hero-typewriter-wrap hero-anim-fade" style={{ animationDelay: '0.3s' }}>
-              <span className="hero-typewriter-label">{lang === 'en' ? 'We build' : 'نبني'}</span>
+              <span className="hero-typewriter-label">{t('hero.weBuild')}</span>
               <Typewriter words={t('hero.words')} />
             </div>
 
@@ -171,14 +171,14 @@ export default function Hero() {
                 onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                 className="group hero-cta-primary"
               >
-                {lang === 'en' ? 'See Our Work' : 'شاهد أعمالنا'}
+                {t('hero.seeOurWork')}
                 {isRTL ? <ArrowLeft size={16} className="hero-cta-arrow" /> : <ArrowRight size={16} className="hero-cta-arrow" />}
               </Button>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="hero-cta-secondary"
               >
-                {lang === 'en' ? 'Get a free quote' : 'احصل على عرض سعر'}
+                {t('hero.getQuote')}
                 {isRTL ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
               </button>
             </div>

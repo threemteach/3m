@@ -8,7 +8,7 @@ const en = {
     line1: 'Where Ambition', line2: 'Meets', line3: 'Engineering',
     tagline: 'Professional web apps, stores, and MVPs — built fast and designed to get results.',
     words: ['Web Apps', 'E-Commerce', 'Shopify Stores', 'Startup MVPs', 'UI/UX Design'],
-    liveActivity: 'Live Activity', projectVelocity: 'Project Velocity',
+    weBuild: 'We build', seeOurWork: 'See Our Work', getQuote: 'Get a free quote',
   },
   marquee: ['Web Apps', 'E-Commerce', 'Shopify', 'MVPs', 'UI/UX Design', 'Supabase'],
   services: {
@@ -148,11 +148,9 @@ const en = {
       { title: 'Launch & Beyond', desc: 'We launch your site or app, and stay reachable for fixes and updates after.' },
     ],
   },
-  techStack: { label: 'TECHNOLOGY', heading: 'Built With The Best Tools' },
   cta: {
     heading: "Ready to Build Something", headingAccent: "Exceptional?",
     desc: "Tell us about your business or your idea — we'll tell you honestly what it'll take to build it.",
-    chat: 'Chat', whatsApp: 'WhatsApp', email: 'Email', call: 'Call', btn: 'Send Message',
     footnote: 'Free consultation · No commitment · Reply within 24h',
     formName: 'Your Name', formEmail: 'Your Email', formPhone: 'Phone (optional)',
     formMessage: 'Tell us about your project', formSubmit: 'Send Message',
@@ -176,7 +174,7 @@ const ar = {
     line1: 'حيث يلتقي', line2: 'الطموح', line3: 'بالهندسة',
     tagline: 'تطبيقات ويب ومتاجر ومنتجات أولية احترافية — تُبنى بسرعة ومصممة لتحقق نتائج فعلية.',
     words: ['تطبيقات ويب', 'تجارة إلكترونية', 'متاجر Shopify', 'MVP للستارت أبس', 'تصميم واجهات'],
-    liveActivity: 'نشاط حي', projectVelocity: 'سرعة المشاريع',
+    weBuild: 'نبني', seeOurWork: 'شاهد أعمالنا', getQuote: 'احصل على عرض سعر',
   },
   marquee: ['تطبيقات ويب', 'تجارة إلكترونية', 'Shopify', 'MVP', 'تصميم واجهات', 'Supabase'],
   services: {
@@ -315,11 +313,9 @@ const ar = {
       { title: 'إطلاق وما بعده', desc: 'نطلق موقعك أو تطبيقك، ونبقى متاحين للتعديلات والتحديثات بعد ذلك.' },
     ],
   },
-  techStack: { label: 'التقنيات', heading: 'نبني بأفضل الأدوات' },
   cta: {
     heading: 'مستعد لبناء شيء', headingAccent: 'استثنائي؟',
     desc: 'أخبرنا عن عملك أو فكرتك — وسنخبرك بصدق بما يلزم لتنفيذها.',
-    chat: 'محادثة', whatsApp: 'واتساب', email: 'بريد إلكتروني', call: 'اتصال', btn: 'أرسل الرسالة',
     footnote: 'استشارة مجانية · بدون التزام · رد خلال 24 ساعة',
     formName: 'الاسم', formEmail: 'البريد الإلكتروني', formPhone: 'رقم الهاتف (اختياري)',
     formMessage: 'أخبرنا عن مشروعك', formSubmit: 'أرسل الرسالة',

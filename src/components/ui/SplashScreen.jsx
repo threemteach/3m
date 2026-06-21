@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext.jsx'
+import { useTranslation } from '../../context/LanguageContext.jsx'
 
 function rand(min, max) { return Math.random() * (max - min) + min }
 
 export default function SplashScreen({ onFinish }) {
   const { dark } = useTheme()
+  const { t } = useTranslation()
   const [show, setShow] = useState(true)
   const [progress, setProgress] = useState(0)
   const ready = useRef(false)
@@ -36,7 +38,7 @@ export default function SplashScreen({ onFinish }) {
   const mutedColor = dark ? 'rgba(255,255,255,0.25)' : 'rgba(26,20,16,0.35)'
   const barTrack = dark ? 'rgba(255,255,255,0.08)' : 'rgba(26,20,16,0.08)'
   const logo = dark ? '/logos/Orange.svg' : '/logos/dark%20purp.svg'
-  const tagline = dark ? 'Your Vision, Engineered' : 'Dream it and we build it'
+  const tagline = t('hero.label')
 
   useEffect(() => {
     let mounted = true
