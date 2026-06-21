@@ -5,22 +5,22 @@ import { useTranslation } from '../../context/LanguageContext.jsx'
 const team = [
   {
     name: 'Mohamed Ramy Elmagrby',
-    titleEn: 'Frontend Developer',
-    titleAr: 'مطور واجهات أمامية',
+    titleEn: 'Web Developer',
+    titleAr: 'مطور ويب',
     img: '/ramy.webp',
     portfolio: '#',
   },
   {
     name: 'Mahmoud Magdy Hussien',
-    titleEn: 'Chief Executive Officer',
-    titleAr: 'الرئيس التنفيذي',
+    titleEn: 'CEO & Web Developer',
+    titleAr: 'الرئيس التنفيذي ومطور ويب',
     img: '/mahmoud.webp',
     portfolio: 'https://mv7mood.vercel.app/',
   },
   {
     name: 'Moataz Gomaa',
-    titleEn: 'Creative Designer',
-    titleAr: 'مصمم إبداعي',
+    titleEn: 'UI/UX & Creative Designer',
+    titleAr: 'مصمم واجهات وإبداعي',
     img: '/moataz.webp',
     portfolio: 'https://moataz-s.netlify.app/',
   },
