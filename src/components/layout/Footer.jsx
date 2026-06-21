@@ -50,8 +50,8 @@ export default function Footer() {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)]">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
+          <div className="col-span-2 sm:col-span-1">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
               alt="triple m — Digital Craftsmanship Studio"
@@ -71,7 +71,7 @@ export default function Footer() {
                       onClick={() => scrollTo(l.id)}
                       className="text-sm transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
                       style={{ color: 'var(--text-secondary)' }}
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-electric)'}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
                       onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                     >
                       {l.label}
@@ -92,7 +92,7 @@ export default function Footer() {
                     rel="noreferrer"
                     className="text-sm transition-colors duration-200"
                     style={{ color: 'var(--text-secondary)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-electric)'}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-fire)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                   >
                     {s.name}

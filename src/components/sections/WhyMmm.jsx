@@ -3,6 +3,7 @@ import { Zap, Shield, Users, Clock, BarChart3, MessageCircle } from 'lucide-reac
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 const icons = [Clock, Shield, Users, BarChart3, MessageCircle, Zap]
+const iconColors = ['var(--accent-fire)', 'var(--accent-neon)', 'var(--accent-electric)', 'var(--accent-fire)', 'var(--accent-neon)', 'var(--accent-electric)']
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
 const itemAnim = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } }
@@ -47,7 +48,7 @@ export default function WhyMmm() {
                 style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--accent-fire)', color: '#fff' }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: iconColors[i], color: '#fff' }}>
                     <Icon size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -79,6 +80,7 @@ export default function WhyMmm() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 text-center p-8 rounded-3xl border"
           style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
         >

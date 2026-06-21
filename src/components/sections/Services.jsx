@@ -84,7 +84,7 @@ export default function Services() {
               }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="hero-service-icon" style={{ background: `linear-gradient(135deg, var(--accent-fire), var(--accent-electric))` }}>{s.icon}</span>
+                <span className="hero-service-icon" style={{ background: `linear-gradient(135deg, ${s.accent}, color-mix(in srgb, ${s.accent} 60%, var(--accent-electric)))` }}>{s.icon}</span>
                 <h3 className="font-space font-semibold text-lg">{s.title}</h3>
               </div>
               <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
@@ -146,7 +146,7 @@ function ServiceModal({ service, onClose, lang }) {
       >
         <div className="sticky top-0 z-10 flex items-center justify-between px-6 md:px-8 h-14 border-b" style={{ background: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
           <div className="flex items-center gap-2">
-            <span className="hero-service-icon hero-service-icon-sm" style={{ background: `linear-gradient(135deg, var(--accent-fire), var(--accent-electric))` }}>{service.icon}</span>
+            <span className="hero-service-icon hero-service-icon-sm" style={{ background: `linear-gradient(135deg, ${service.accent}, color-mix(in srgb, ${service.accent} 60%, var(--accent-electric)))` }}>{service.icon}</span>
             <span className="font-space font-semibold">{service.title}</span>
           </div>
           <button

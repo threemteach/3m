@@ -68,10 +68,12 @@ export default function Navbar() {
           <div
             className="flex items-center justify-between rounded-full transition-all duration-500 navbar-island navbar-pill px-4 sm:px-5 md:px-7"
             style={{
-              background: 'rgba(13, 10, 21, 0.35)',
+              background: scrolled ? 'rgba(13, 10, 21, 0.55)' : 'rgba(13, 10, 21, 0.35)',
               border: '1px solid rgba(255, 247, 233, 0.06)',
               opacity: 0.85,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+              boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.45)' : '0 8px 32px rgba(0,0,0,0.35)',
+              backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
+              WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               padding: '10px 16px',
             }}
           >
@@ -89,7 +91,7 @@ export default function Navbar() {
                     onClick={() => scrollTo(l.id)}
                     className="group bg-transparent border-none cursor-pointer transition-colors duration-200"
                     style={{
-                      color: effectiveActive === l.id ? '#c34a36' : 'rgba(255, 247, 233, 0.65)',
+                      color: effectiveActive === l.id ? 'var(--accent-fire)' : 'rgba(255, 247, 233, 0.65)',
                       fontSize: effectiveActive === l.id ? '14px' : '13px',
                       fontWeight: effectiveActive === l.id ? 700 : 500,
                       letterSpacing: '0.03em',
@@ -105,7 +107,7 @@ export default function Navbar() {
                         className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 ${
                           effectiveActive === l.id ? 'w-full' : 'w-0 group-hover:w-full'
                         }`}
-                        style={{ background: '#c34a36' }}
+                        style={{ background: 'var(--accent-fire)' }}
                       />
                     </span>
                   </button>
@@ -120,7 +122,7 @@ export default function Navbar() {
                 onClick={() => scrollTo('contact')}
                 className="border-none cursor-pointer text-[13px] font-medium rounded-full px-5 py-2 transition-all duration-200 hover:brightness-110 shrink-0"
                 style={{
-                  background: '#c34a36',
+                  background: 'var(--accent-fire)',
                   color: '#FFF7E9',
                   boxShadow: '0 0 20px rgba(195, 74, 54, 0.35)',
                 }}
@@ -161,7 +163,7 @@ export default function Navbar() {
                 <X size={24} style={{ color: '#FFF7E9' }} />
               </button>
             </div>
-            <div className="flex-1 flex flex-col items-center justify-center gap-8">
+            <div className="flex-1 flex flex-col items-center justify-center gap-8 overflow-y-auto">
               {links.map((l, i) => (
                 <motion.button
                   key={l.id}
@@ -171,7 +173,7 @@ export default function Navbar() {
                   onClick={() => scrollTo(l.id)}
                   className="bg-transparent border-none cursor-pointer text-3xl font-bold transition-colors duration-200"
                   style={{
-                    color: effectiveActive === l.id ? '#c34a36' : '#FFF7E9',
+                    color: effectiveActive === l.id ? 'var(--accent-fire)' : '#FFF7E9',
                     fontFamily: lang === 'ar' ? "'Cairo', sans-serif" : "'Space Grotesk', sans-serif",
                     opacity: isProjectsPage && !l.page ? 0.4 : 1,
                   }}
