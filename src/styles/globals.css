@@ -1354,6 +1354,10 @@ body {
     width: 100%;
     justify-content: center;
   }
+  .hero-cta-v2 .hero-cta-secondary {
+    justify-content: center;
+    text-align: center;
+  }
   .hero-svg-bg {
     max-height: 55svh;
   }
