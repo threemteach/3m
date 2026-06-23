@@ -34,7 +34,8 @@ export default function CTA() {
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
     ).then(() => {
       setSubmitted(true)
-    }).catch(() => {
+    }).catch((err) => {
+      console.error('EmailJS error:', err)
       setError(true)
     })
   }
