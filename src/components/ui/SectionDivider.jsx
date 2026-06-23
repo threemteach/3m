@@ -5,8 +5,8 @@ export default function SectionDivider({ flip }) {
         viewBox="0 0 1440 120"
         preserveAspectRatio="none"
         className="absolute bottom-0 w-full h-full"
-        style={{ color: 'var(--bg-secondary)' }}
         fill="currentColor"
+        style={{ color: 'var(--bg-secondary)' }}
       >
         {flip ? (
           <path d="M0,0 C360,120 1080,0 1440,120 L1440,0 L0,0 Z" />
