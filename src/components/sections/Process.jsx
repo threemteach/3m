@@ -105,13 +105,15 @@ export default function Process() {
                     )}
                   </div>
 
-                  {/* ── DESKTOP: 3-column grid [left | circle | right] ── */}
-                  <div className="hidden md:grid items-center" style={{ gridTemplateColumns: '1fr 4rem 1fr' }}>
+                  {/* ── DESKTOP: 3-column grid [left | circle | right] ──
+                      dir=ltr forces physical left→right column order regardless of page dir.
+                      Text inside each column gets its own dir for correct Arabic rendering.  */}
+                  <div className="hidden md:grid items-center" dir="ltr" style={{ gridTemplateColumns: '1fr 4rem 1fr' }}>
 
-                    {/* Col 1 — left half */}
+                    {/* Col 1 — physical LEFT half */}
                     <div className="pr-8 transition-all duration-700 ease-out hover:-translate-y-0.5">
                       {goesLeft && (
-                        <div className="text-right">
+                        <div dir={isRTL ? 'rtl' : 'ltr'} className="text-right">
                           <h3 className="font-space font-semibold text-xl mb-2">{s.title}</h3>
                           <p style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
                         </div>
@@ -122,20 +124,16 @@ export default function Process() {
                     <div className="flex items-center justify-center relative z-10">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
-                        style={{
-                          background: 'var(--accent-fire)',
-                          color: '#fff',
-                          boxShadow: '0 0 0 4px var(--bg-secondary)',
-                        }}
+                        style={{ background: 'var(--accent-fire)', color: '#fff', boxShadow: '0 0 0 4px var(--bg-secondary)' }}
                       >
                         {s.num}
                       </div>
                     </div>
 
-                    {/* Col 3 — right half */}
+                    {/* Col 3 — physical RIGHT half */}
                     <div className="pl-8 transition-all duration-700 ease-out hover:-translate-y-0.5">
                       {!goesLeft && (
-                        <div className="text-left">
+                        <div dir={isRTL ? 'rtl' : 'ltr'} className={isRTL ? 'text-right' : 'text-left'}>
                           <h3 className="font-space font-semibold text-xl mb-2">{s.title}</h3>
                           <p style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
                         </div>
