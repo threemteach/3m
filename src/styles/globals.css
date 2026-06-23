@@ -1227,6 +1227,10 @@ body {
   z-index: 1;
 }
 
+:root:not(.dark) .hero-svg-bg {
+  background: linear-gradient(to bottom, #0f0d1a 40%, transparent 100%);
+}
+
 .hero-svg-img {
   display: block;
   width: 100%;
