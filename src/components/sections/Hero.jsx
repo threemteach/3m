@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Sparkles, Globe, Code2, Store, ShoppingBag, Palette } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Sparkles } from 'lucide-react'
 import Button from '../ui/Button.jsx'
-import ThreeBackground from '../ui/ThreeBackground.jsx'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 function AnimatedGradientText({ children }) {
@@ -58,175 +57,96 @@ function Typewriter({ words }) {
   )
 }
 
-function ServicePill({ icon: Icon, label, delay, color }) {
-  return (
-    <div className="hero-service-pill" style={{ '--anim-delay': delay + 's' }}>
-      <span className="hero-service-pill-icon" style={{ color }}>
-        <Icon size={14} />
-      </span>
-      <span>{label}</span>
-    </div>
-  )
-}
-
-function OrbitalVisual() {
-  return (
-    <div className="hero-orbital">
-      <div className="hero-orbital-core">
-        <div className="hero-orbital-core-inner">
-          <Code2 size={28} strokeWidth={1.5} />
-        </div>
-      </div>
-      <div className="hero-orbital-ring hero-orbital-ring-1">
-        <div className="hero-orbital-dot" style={{ '--dot-color': 'var(--accent-fire)' }}>
-          <Globe size={14} />
-        </div>
-      </div>
-      <div className="hero-orbital-ring hero-orbital-ring-2">
-        <div className="hero-orbital-dot" style={{ '--dot-color': 'var(--accent-fire)' }}>
-          <Store size={14} />
-        </div>
-      </div>
-      <div className="hero-orbital-ring hero-orbital-ring-3">
-        <div className="hero-orbital-dot" style={{ '--dot-color': 'var(--accent-fire)' }}>
-          <ShoppingBag size={14} />
-        </div>
-      </div>
-      <div className="hero-orbital-glow" />
-    </div>
-  )
-}
-
-const badgeIcons = { globe: Globe, 'shopping-bag': ShoppingBag, palette: Palette }
-
-function ServiceBadge({ icon, label, delay }) {
-  const IconComp = badgeIcons[icon]
-  return (
-    <div className="hero-stat-card" style={{ '--anim-delay': delay + 's' }}>
-      <span className="hero-stat-value" style={{ color: 'var(--accent-fire)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 16 }}>
-        {IconComp && <IconComp size={14} />}
-      </span>
-      <span className="hero-stat-label" style={{ fontSize: 10 }}>{label}</span>
-    </div>
-  )
-}
-
 export default function Hero() {
   const { t, lang } = useTranslation()
   const { scrollYProgress } = useScroll()
-  const bgY = useTransform(scrollYProgress, [0, 0.3], ['0%', '20%'])
+  const bgY = useTransform(scrollYProgress, [0, 0.3], ['0%', '12%'])
   const isRTL = lang === 'ar'
 
-  const serviceItems = [
-    { icon: Globe, label: lang === 'en' ? 'Web Apps' : 'تطبيقات ويب', color: 'var(--accent-fire)' },
-    { icon: ShoppingBag, label: lang === 'en' ? 'E-Commerce' : 'تجارة إلكترونية', color: 'var(--accent-fire)' },
-    { icon: Store, label: lang === 'en' ? 'Shopify' : 'Shopify', color: 'var(--accent-fire)' },
-    { icon: Code2, label: lang === 'en' ? 'MVPs' : 'MVP', color: 'var(--accent-fire)' },
-    { icon: Palette, label: lang === 'en' ? 'UI/UX' : 'تصميم واجهات', color: 'var(--accent-fire)' },
-  ]
-
   return (
-    <section id="hero" className="hero-section">
-      <ThreeBackground />
+    <section id="hero" className="hero-section hero-section-v2">
 
-      <motion.div className="hero-bg-effects" style={{ y: bgY }}>
-        <div className="hero-bg-gradient" />
-        <div className="hero-bg-orb hero-bg-orb-1" />
-        <div className="hero-bg-orb hero-bg-orb-2" />
-        <div className="hero-bg-orb hero-bg-orb-3" />
+      {/* ── SVG beam background ── */}
+      <motion.div className="hero-svg-bg" style={{ y: bgY }} aria-hidden="true">
+        <img
+          src="/background.svg"
+          alt=""
+          className="hero-svg-img"
+          draggable="false"
+        />
       </motion.div>
 
+      {/* ── Noise grain ── */}
       <div className="hero-noise" />
 
-      <div className="hero-content">
-        <div className="hero-layout">
-          <div className="hero-text-side">
-            <div className="hero-badge hero-anim-fade-up" style={{ animationDelay: '0s' }}>
-              <span className="hero-badge-dot" />
-              <Sparkles size={12} />
-              <span>{t('hero.label')}</span>
-            </div>
+      {/* ── Centred content ── */}
+      <div className="hero-content hero-content-v2">
+        <div className="hero-inner-v2">
 
-            <h1 className="hero-heading hero-anim-fade-up" style={{ animationDelay: '0.1s' }}>
-              <span className="hero-heading-line">{t('hero.line1')}</span>
-              <span className="hero-heading-line">
-                {t('hero.line2')}{' '}
-                <AnimatedGradientText>{t('hero.line3')}</AnimatedGradientText>
-              </span>
-            </h1>
-
-            <p className="hero-tagline hero-anim-fade-up-50" style={{ animationDelay: '0.2s' }}>
-              {t('hero.tagline')}
-            </p>
-
-            <div className="hero-typewriter-wrap hero-anim-fade" style={{ animationDelay: '0.3s' }}>
-              <span className="hero-typewriter-label">{t('hero.weBuild')}</span>
-              <Typewriter words={t('hero.words')} />
-            </div>
-
-            <div className="hero-cta-group hero-anim-fade-up-50" style={{ animationDelay: '0.35s' }}>
-              <Button
-                variant="gradient"
-                size="md"
-                onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group hero-cta-primary"
-              >
-                {t('hero.seeOurWork')}
-                {isRTL ? <ArrowLeft size={16} className="hero-cta-arrow" /> : <ArrowRight size={16} className="hero-cta-arrow" />}
-              </Button>
-              <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hero-cta-secondary"
-              >
-                {t('hero.getQuote')}
-                {isRTL ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
-              </button>
-            </div>
-
-            <div className="hero-services-row hero-anim-fade" style={{ animationDelay: '0.5s' }}>
-              {serviceItems.map((s, i) => (
-                <ServicePill key={i} icon={s.icon} label={s.label} color={s.color} delay={0.55 + i * 0.08} />
-              ))}
-            </div>
+          {/* Badge */}
+          <div className="hero-badge hero-anim-fade-up" style={{ animationDelay: '0s' }}>
+            <span className="hero-badge-dot" />
+            <Sparkles size={12} />
+            <span>{t('hero.label')}</span>
           </div>
 
-          <div className="hero-visual-side hero-anim-scale" style={{ animationDelay: '0.4s' }}>
-            <div className="hero-grid-overlay" />
-            <OrbitalVisual />
+          {/* Heading */}
+          <h1
+            className="hero-heading hero-heading-v2 hero-anim-fade-up"
+            style={{ animationDelay: '0.1s' }}
+          >
+            <span className="hero-heading-line">{t('hero.line1')}</span>
+            <span className="hero-heading-line">
+              {t('hero.line2')}{' '}
+              <AnimatedGradientText>{t('hero.line3')}</AnimatedGradientText>
+            </span>
+          </h1>
 
-            <div className="hero-mockup-browser hero-anim-fade-up" style={{ animationDelay: '0.7s' }}>
-              <div className="hero-mockup-browser-bar">
-                <span /><span /><span />
-              </div>
-              <div className="hero-mockup-browser-body">
-                <div className="hero-mockup-line hero-mockup-line-short" />
-                <div className="hero-mockup-line hero-mockup-line-long" />
-                <div className="hero-mockup-line hero-mockup-line-medium" />
-                <div className="hero-mockup-line hero-mockup-line-long" />
-                <div className="hero-mockup-line hero-mockup-line-short" />
-              </div>
-            </div>
+          {/* Tagline */}
+          <p
+            className="hero-tagline hero-tagline-v2 hero-anim-fade-up-50"
+            style={{ animationDelay: '0.2s' }}
+          >
+            {t('hero.tagline')}
+          </p>
 
-            <div className="hero-mockup-phone hero-anim-slide-right" style={{ animationDelay: '0.9s' }}>
-              <div className="hero-mockup-phone-notch" />
-              <div className="hero-mockup-phone-screen">
-                <div className="hero-mockup-phone-dot" />
-                <div className="hero-mockup-phone-bar" />
-                <div className="hero-mockup-phone-bar hero-mockup-phone-bar-short" />
-              </div>
-            </div>
-
-            <div className="hero-floating-stats">
-              <ServiceBadge icon="globe" label={lang === 'en' ? 'Web Development' : 'تطوير الويب'} delay={0.6} />
-              <ServiceBadge icon="shopping-bag" label={lang === 'en' ? 'E-Commerce' : 'تجارة إلكترونية'} delay={0.7} />
-              <ServiceBadge icon="palette" label={lang === 'en' ? 'UI/UX Design' : 'تصميم واجهات'} delay={0.8} />
-            </div>
+          {/* Typewriter */}
+          <div
+            className="hero-typewriter-wrap hero-typewriter-v2 hero-anim-fade"
+            style={{ animationDelay: '0.3s' }}
+          >
+            <span className="hero-typewriter-label">{t('hero.weBuild')}</span>
+            <Typewriter words={t('hero.words')} />
           </div>
+
+          {/* CTAs */}
+          <div
+            className="hero-cta-group hero-cta-v2 hero-anim-fade-up-50"
+            style={{ animationDelay: '0.35s' }}
+          >
+            <Button
+              variant="gradient"
+              size="md"
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group hero-cta-primary"
+            >
+              {t('hero.seeOurWork')}
+              {isRTL
+                ? <ArrowLeft size={16} className="hero-cta-arrow" />
+                : <ArrowRight size={16} className="hero-cta-arrow" />}
+            </Button>
+
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hero-cta-secondary"
+            >
+              {t('hero.getQuote')}
+              {isRTL ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
+            </button>
+          </div>
+
         </div>
       </div>
-
-
-
     </section>
   )
 }

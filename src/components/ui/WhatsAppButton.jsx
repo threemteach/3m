@@ -28,6 +28,132 @@ function WhatsAppIcon({ size = 28 }) {
   )
 }
 
+function PulseRings() {
+  return (
+    <span className="absolute inset-0 flex items-center justify-center">
+      <span className="absolute w-full h-full rounded-full bg-[#25D366]/20 animate-ping" style={{ animationDuration: '2.5s' }} />
+      <span className="absolute w-[130%] h-[130%] rounded-full bg-[#25D366]/10 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.6s' }} />
+      <span className="absolute w-[160%] h-[160%] rounded-full bg-[#25D366]/5 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '1.2s' }} />
+    </span>
+  )
+}
+
+function DesktopButton() {
+  const [labelVisible, setLabelVisible] = useState(false)
+
+  return (
+    <div
+      className="fixed bottom-6 left-6 z-50"
+      onMouseEnter={() => setLabelVisible(true)}
+      onMouseLeave={() => setLabelVisible(false)}
+    >
+      <WhatsAppLink
+        className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer border-none transition-all duration-300 hover:scale-110 hover:shadow-xl group"
+        ariaLabel="Chat on WhatsApp"
+      >
+        <PulseRings />
+        <div
+          className="relative w-full h-full rounded-full flex items-center justify-center"
+          style={{
+            background: 'linear-gradient(135deg, #25D366, #128C7E)',
+            color: '#fff',
+            fontSize: 28,
+          }}
+        >
+          <WhatsAppIcon size={28} />
+        </div>
+      </WhatsAppLink>
+
+      <div
+        className={`absolute left-16 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 ${
+          labelVisible
+            ? 'opacity-100 translate-x-0'
+            : 'opacity-0 -translate-x-2'
+        }`}
+      >
+        <div className="flex items-center gap-2 bg-white dark:bg-[#1a1a2e] text-[#075E54] dark:text-[#25D366] text-xs font-semibold px-4 py-2 rounded-xl shadow-lg whitespace-nowrap">
+          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+          Chat with us
+          <div
+            className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45 bg-white dark:bg-[#1a1a2e]"
+            style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MobileBar({ scrolled, onDismiss, lang }) {
+  const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    if (scrolled) {
+      const t = setTimeout(() => setEntered(true), 100)
+      return () => clearTimeout(t)
+    } else {
+      setEntered(false)
+    }
+  }, [scrolled])
+
+  return (
+    <div
+      className={`md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pt-2 transition-all duration-500 ${
+        scrolled ? 'translate-y-0' : 'translate-y-full'
+      }`}
+      style={{
+        background: 'linear-gradient(to top, rgba(0,0,0,0.15), transparent)',
+        pointerEvents: scrolled ? 'auto' : 'none',
+      }}
+    >
+      <div
+        className="relative flex items-center justify-between px-5 py-3.5 rounded-2xl shadow-2xl overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+          color: '#fff',
+        }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none opacity-20"
+          style={{
+            background: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.4), transparent 60%)',
+          }}
+        />
+
+        <WhatsAppLink
+          className="relative flex items-center gap-3 flex-1 no-underline"
+          style={{ color: '#fff' }}
+          ariaLabel={lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
+        >
+          <span className="relative flex items-center justify-center w-9 h-9 rounded-full bg-white/15">
+            <WhatsAppIcon size={20} />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-white animate-ping" />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-white" />
+          </span>
+
+          <span className="flex items-center gap-1 text-sm font-semibold">
+            {lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
+            <span className="inline-flex items-center gap-0.5 ml-1">
+              <span className="w-1 h-1 rounded-full bg-white/70 animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-1 h-1 rounded-full bg-white/70 animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-1 h-1 rounded-full bg-white/70 animate-bounce" style={{ animationDelay: '300ms' }} />
+            </span>
+          </span>
+        </WhatsAppLink>
+
+        <button
+          onClick={onDismiss}
+          className="relative bg-transparent border-none cursor-pointer p-1.5 rounded-full hover:bg-white/10 transition-colors shrink-0"
+          style={{ color: '#fff' }}
+          aria-label="Close"
+        >
+          <X size={18} />
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function WhatsAppButton() {
   const { lang } = useTranslation()
   const [dismissed, setDismissed] = useState(false)
@@ -40,82 +166,13 @@ export default function WhatsAppButton() {
   }, [])
 
   if (dismissed) {
-    return (
-      <WhatsAppLink
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer border-none transition-all duration-300 hover:scale-110 hover:shadow-xl"
-        ariaLabel="Chat on WhatsApp"
-      >
-        <div
-          className="w-full h-full rounded-full flex items-center justify-center"
-          style={{
-            background: '#25D366',
-            color: '#fff',
-            fontSize: 28,
-            animation: 'whatsapp-pulse 2s ease-in-out infinite',
-          }}
-        >
-          <WhatsAppIcon size={28} />
-        </div>
-        <style>{`
-          @keyframes whatsapp-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            50% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
-          }
-        `}</style>
-      </WhatsAppLink>
-    )
+    return <DesktopButton />
   }
 
   return (
     <>
-      {/* Desktop floating button */}
-      <WhatsAppLink
-        className="hidden md:flex fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full items-center justify-center shadow-lg cursor-pointer border-none transition-all duration-300 hover:scale-110 hover:shadow-xl"
-        ariaLabel="Chat on WhatsApp"
-      >
-        <div
-          className="w-full h-full rounded-full flex items-center justify-center"
-          style={{
-            background: '#25D366',
-            color: '#fff',
-            fontSize: 28,
-            animation: 'whatsapp-pulse 2s ease-in-out infinite',
-          }}
-        >
-          <WhatsAppIcon size={28} />
-        </div>
-        <style>{`
-          @keyframes whatsapp-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            50% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
-          }
-        `}</style>
-      </WhatsAppLink>
-
-      {/* Mobile bottom bar */}
-      <div
-        className={`md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 transition-all duration-500 ${
-          scrolled ? 'translate-y-0' : 'translate-y-full'
-        }`}
-        style={{ background: '#25D366', color: '#fff' }}
-      >
-        <WhatsAppLink className="flex items-center gap-3 flex-1 no-underline" style={{ color: '#fff' }}
-          ariaLabel={lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
-        >
-          <WhatsAppIcon size={22} />
-          <span className="text-sm font-semibold">
-            {lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
-          </span>
-        </WhatsAppLink>
-        <button
-          onClick={() => setDismissed(true)}
-          className="bg-transparent border-none cursor-pointer p-1 shrink-0"
-          style={{ color: '#fff' }}
-          aria-label="Close"
-        >
-          <X size={18} />
-        </button>
-      </div>
+      <DesktopButton />
+      <MobileBar scrolled={scrolled} onDismiss={() => setDismissed(true)} lang={lang} />
     </>
   )
 }
