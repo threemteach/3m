@@ -1,7 +1,13 @@
 import { useTranslation } from '../context/LanguageContext.jsx'
+import useSEO from '../hooks/useSEO.js'
 
 export default function Terms() {
   const { lang } = useTranslation()
+  useSEO({
+    title: lang === 'en' ? 'Terms of Service' : 'شروط الخدمة',
+    description: lang === 'en' ? 'triple m terms of service — the terms governing the use of our website and services.' : 'شروط خدمة triple m — الشروط التي تنظم استخدام موقعنا وخدماتنا.',
+    path: '/terms',
+  })
 
   if (lang === 'ar') {
     return (

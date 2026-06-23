@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Layers, Palette, Code, Gauge, Globe, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
+import useSEO from '../hooks/useSEO.js'
 import ProjectModal from '../components/ui/ProjectModal.jsx'
 
 const projects = [
@@ -63,6 +64,11 @@ const projects = [
 export default function ProjectsPage() {
   const { t, lang } = useTranslation()
   const { dark } = useTheme()
+  useSEO({
+    title: lang === 'en' ? 'Our Work' : 'أعمالنا',
+    description: lang === 'en' ? 'Explore our portfolio of web apps, e-commerce platforms, and Shopify stores built for businesses in Egypt and beyond.' : 'تصفح أعمالنا من تطبيقات الويب ومنصات التجارة الإلكترونية ومتاجر Shopify التي بنيناها للشركات في مصر وخارجها.',
+    path: '/projects',
+  })
   const [selected, setSelected] = useState(null)
   const [featuredIndex, setFeaturedIndex] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)

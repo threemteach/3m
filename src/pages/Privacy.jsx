@@ -1,7 +1,13 @@
 import { useTranslation } from '../context/LanguageContext.jsx'
+import useSEO from '../hooks/useSEO.js'
 
 export default function Privacy() {
   const { lang } = useTranslation()
+  useSEO({
+    title: lang === 'en' ? 'Privacy Policy' : 'سياسة الخصوصية',
+    description: lang === 'en' ? 'triple m privacy policy — how we collect, use, and protect your personal information.' : 'سياسة الخصوصية لـ triple m — كيف نجمع ونستخدم ونحمي معلوماتك الشخصية.',
+    path: '/privacy',
+  })
 
   if (lang === 'ar') {
     return (
