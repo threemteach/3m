@@ -6,6 +6,8 @@
 
 :root {
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   --bg-primary: #FFF7E9;
   --bg-secondary: #FFFFFF;
   --bg-tertiary: #F2EEE9;
