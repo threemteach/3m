@@ -39,7 +39,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-[var(--border)]" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 pb-24 md:pb-16">
         {/* Top row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
           <div className="flex items-center gap-4">
