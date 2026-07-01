@@ -47,38 +47,33 @@ CREATE POLICY "Anyone can read visible projects"
   ON projects FOR SELECT
   USING (visible = true);
 
--- Authenticated admins can read ALL projects (including hidden)
-CREATE POLICY "Admins can read all projects"
+-- Any authenticated user is admin (login page is private, no public sign-up)
+CREATE POLICY "Authenticated users can read all projects"
   ON projects FOR SELECT
-  USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM admins));
-
--- Only admins can insert
-CREATE POLICY "Admins can insert projects"
-  ON projects FOR INSERT
-  WITH CHECK (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM admins));
-
--- Only admins can update
-CREATE POLICY "Admins can update projects"
-  ON projects FOR UPDATE
-  USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM admins));
-
--- Only admins can delete
-CREATE POLICY "Admins can delete projects"
-  ON projects FOR DELETE
-  USING (auth.role() = 'authenticated' AND auth.uid() IN (SELECT id FROM admins));
-
--- 5. RLS policies for admins table
--- Any authenticated user can read the admins table (needed to check if they're an admin)
-CREATE POLICY "Authenticated users can read admins"
-  ON admins FOR SELECT
   USING (auth.role() = 'authenticated');
 
--- 6. Storage bucket for project images
--- Run this separately in the Supabase dashboard:
--- Go to Storage → Create a new bucket named "projects" (public bucket)
+CREATE POLICY "Authenticated users can insert projects"
+  ON projects FOR INSERT
+  WITH CHECK (auth.role() = 'authenticated');
 
--- 7. Seed: Insert first admin (replace with actual user ID after creating user)
+CREATE POLICY "Authenticated users can update projects"
+  ON projects FOR UPDATE
+  USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can delete projects"
+  ON projects FOR DELETE
+  USING (auth.role() = 'authenticated');
+
+-- 5. RLS policies for admins table (kept for audit, but no longer required by app)
+CREATE POLICY "Users can read own admin record"
+  ON admins FOR SELECT
+  USING (auth.uid() = id);
+
+-- 6. Storage bucket for project images
+-- Create bucket: Go to Storage → Create a new bucket named "projects" (public bucket)
+-- Then run the storage policies from fix-rls-security.sql
+
+-- 7. Create admin users
 -- Instructions:
---   a. Go to Authentication → Users → Invite user: mahmoudmagdyn123@gmail.com
---   b. After user accepts, get the user ID from Authentication → Users
---   c. Run: INSERT INTO admins (id, email) VALUES ('<user-id-from-step-b>', 'mahmoudmagdyn123@gmail.com');
+--   a. Go to Authentication → Users → Add User (enter email + password)
+--   b. Done — no need to insert into admins table (any authenticated user is admin)

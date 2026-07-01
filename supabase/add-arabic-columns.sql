@@ -11,18 +11,16 @@ CREATE POLICY IF NOT EXISTS "Anyone can view project images"
   ON storage.objects FOR SELECT
   USING (bucket_id = 'projects');
 
-CREATE POLICY IF NOT EXISTS "Admins can upload project images"
+CREATE POLICY IF NOT EXISTS "Authenticated users can upload project images"
   ON storage.objects FOR INSERT
   WITH CHECK (
     bucket_id = 'projects'
     AND auth.role() = 'authenticated'
-    AND auth.uid() IN (SELECT id FROM admins)
   );
 
-CREATE POLICY IF NOT EXISTS "Admins can delete project images"
+CREATE POLICY IF NOT EXISTS "Authenticated users can delete project images"
   ON storage.objects FOR DELETE
   USING (
     bucket_id = 'projects'
     AND auth.role() = 'authenticated'
-    AND auth.uid() IN (SELECT id FROM admins)
   );
