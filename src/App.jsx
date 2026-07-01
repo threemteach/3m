@@ -70,11 +70,20 @@ const PrivacyPage = lazy(() => import('./pages/Privacy.jsx'))
 const TermsPage = lazy(() => import('./pages/Terms.jsx'))
 const NotFoundPage = lazy(() => import('./pages/NotFound.jsx'))
 
+// Admin
+const AdminLogin = lazy(() => import('./pages/admin/Login.jsx'))
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout.jsx'))
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.jsx'))
+const AdminProjectsList = lazy(() => import('./pages/admin/ProjectsList.jsx'))
+const AdminProjectForm = lazy(() => import('./pages/admin/ProjectForm.jsx'))
+const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute.jsx'))
+
 function App() {
   const [splashDone, setSplashDone] = useState(false)
   const [navigating, setNavigating] = useState(false)
   const location = useLocation()
   const prevPath = useRef(location.pathname)
+  const isAdmin = location.pathname.startsWith('/admin')
 
   useEffect(() => {
     if (location.pathname !== prevPath.current) {
@@ -85,6 +94,27 @@ function App() {
 
   function onPageLoaded() {
     setNavigating(false)
+  }
+
+  if (isAdmin) {
+    return (
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-primary)' }}>
+          <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--accent-fire)', borderTopColor: 'transparent' }} />
+        </div>
+      }>
+        <CustomCursor />
+        <Routes>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="projects" element={<AdminProjectsList />} />
+            <Route path="projects/new" element={<AdminProjectForm />} />
+            <Route path="projects/:id/edit" element={<AdminProjectForm />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    )
   }
 
   return (

@@ -38,14 +38,10 @@ function PulseRings() {
   )
 }
 
-function DesktopButton() {
-  const [labelVisible, setLabelVisible] = useState(false)
-
+function DesktopButton({ lang, showLabel }) {
   return (
     <div
-      className="fixed bottom-6 left-6 z-50"
-      onMouseEnter={() => setLabelVisible(true)}
-      onMouseLeave={() => setLabelVisible(false)}
+      className="hidden md:block fixed bottom-6 left-6 z-50"
     >
       <WhatsAppLink
         className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer border-none transition-all duration-300 hover:scale-110 hover:shadow-xl group"
@@ -65,15 +61,15 @@ function DesktopButton() {
       </WhatsAppLink>
 
       <div
-        className={`absolute left-16 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 ${
-          labelVisible
+        className={`absolute left-16 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-500 ${
+          showLabel
             ? 'opacity-100 translate-x-0'
             : 'opacity-0 -translate-x-2'
         }`}
       >
         <div className="flex items-center gap-2 bg-white dark:bg-[#1a1a2e] text-[#075E54] dark:text-[#25D366] text-xs font-semibold px-4 py-2 rounded-xl shadow-lg whitespace-nowrap">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          Chat with us
+          {lang === 'en' ? 'Chat with us' : 'تواصل معنا'}
           <div
             className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45 bg-white dark:bg-[#1a1a2e]"
             style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}
@@ -85,17 +81,6 @@ function DesktopButton() {
 }
 
 function MobileBar({ scrolled, onDismiss, lang }) {
-  const [entered, setEntered] = useState(false)
-
-  useEffect(() => {
-    if (scrolled) {
-      const t = setTimeout(() => setEntered(true), 100)
-      return () => clearTimeout(t)
-    } else {
-      setEntered(false)
-    }
-  }, [scrolled])
-
   return (
     <div
       className={`md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pt-2 transition-all duration-500 ${
@@ -123,7 +108,7 @@ function MobileBar({ scrolled, onDismiss, lang }) {
         <WhatsAppLink
           className="relative flex items-center gap-3 flex-1 no-underline"
           style={{ color: '#fff' }}
-          ariaLabel={lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
+          ariaLabel={lang === 'en' ? 'Chat with us' : 'تواصل معنا'}
         >
           <span className="relative flex items-center justify-center w-9 h-9 rounded-full bg-white/15">
             <WhatsAppIcon size={20} />
@@ -132,7 +117,7 @@ function MobileBar({ scrolled, onDismiss, lang }) {
           </span>
 
           <span className="flex items-center gap-1 text-sm font-semibold">
-            {lang === 'en' ? 'Chat with us on WhatsApp' : 'تواصل معنا عبر واتساب'}
+            {lang === 'en' ? 'Chat with us' : 'تواصل معنا'}
             <span className="inline-flex items-center gap-0.5 ml-1">
               <span className="w-1 h-1 rounded-full bg-white/70 animate-bounce" style={{ animationDelay: '0ms' }} />
               <span className="w-1 h-1 rounded-full bg-white/70 animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -158,20 +143,25 @@ export default function WhatsAppButton() {
   const { lang } = useTranslation()
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [desktopLabel, setDesktopLabel] = useState(false)
 
   useEffect(() => {
-    function onScroll() { setScrolled(window.scrollY > 300) }
+    function onScroll() {
+      const y = window.scrollY
+      setScrolled(y > 300)
+      setDesktopLabel(y > 500)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   if (dismissed) {
-    return <DesktopButton />
+    return <DesktopButton lang={lang} showLabel={desktopLabel} />
   }
 
   return (
     <>
-      <DesktopButton />
+      <DesktopButton lang={lang} showLabel={desktopLabel} />
       <MobileBar scrolled={scrolled} onDismiss={() => setDismissed(true)} lang={lang} />
     </>
   )

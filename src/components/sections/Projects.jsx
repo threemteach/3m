@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react'
@@ -9,59 +9,7 @@ import { useTranslation } from '../../context/LanguageContext.jsx'
 import { useTheme } from '../../context/ThemeContext.jsx'
 import Button from '../ui/Button.jsx'
 import ProjectModal from '../ui/ProjectModal.jsx'
-
-const projects = [
-  {
-    name: 'Rent Go',
-    url: 'https://rent-go.ae/',
-    light: '/projects/rent_and_go_light.webp',
-    dark: '/projects/rent_and_go_dark.webp',
-    alt: 'Rent Go car rental booking platform homepage',
-    tag: 'Web App',
-    description: 'A full-featured car rental booking platform with real-time availability, fleet management, and online payments.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Booking Engine', 'Payment Integration', 'Admin Dashboard'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Stripe', 'Node.js'],
-    features: ['Real-time car availability', 'Online booking with payment', 'Fleet management dashboard', 'Multi-language support'],
-  },
-  {
-    name: 'Watan Alex',
-    url: 'https://watan-alex.netlify.app/',
-    light: '/projects/watan_alex_light.webp',
-    dark: '/projects/watan_alex_dark.webp',
-    alt: 'Watan Alex real estate property listings website',
-    tag: 'Web App',
-    description: 'A modern real estate platform showcasing property listings with advanced search, virtual tours, and agent profiles.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Property CMS', 'Map Integration', 'SEO Optimization'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Mapbox', 'Sanity CMS'],
-    features: ['Advanced property search', 'Interactive maps', 'Virtual tour support', 'Agent management system'],
-  },
-  {
-    name: 'Royal CCR',
-    url: 'https://royal-ccrs.vercel.app/',
-    light: '/projects/royal_ccr.webp',
-    dark: '/projects/royal_ccr.webp',
-    alt: 'Royal CCR construction and contracting services site',
-    tag: 'Web App',
-    description: 'A professional corporate website for a construction and contracting company showcasing their portfolio and services.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Portfolio Showcase', 'Contact System', 'Performance Optimization'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
-    features: ['Project portfolio gallery', 'Service showcase', 'Contact inquiry form', 'Fast loading performance'],
-  },
-  {
-    name: 'Egyfield',
-    url: 'https://egyfield.com/',
-    light: '/projects/egyfield_light.webp',
-    dark: '/projects/egyfield_dark.webp',
-    alt: 'Egyfield oil and gas industry services website',
-    tag: 'Web App',
-    description: 'A B2B corporate website for an oil and gas services company, featuring their expertise, projects, and industry insights.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Corporate CMS', 'Blog/News System', 'Multilingual Support'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Headless CMS', 'i18n'],
-    features: ['Corporate brand identity', 'News and insights blog', 'Project case studies', 'Arabic & English support'],
-  },
-]
-
-const slides = [...projects, ...projects, ...projects]
+import { supabase } from '../../lib/supabase'
 
 const autoplayPlugin = Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
 
@@ -72,6 +20,32 @@ export default function Projects() {
   const isRTL = lang === 'ar'
   const apiRef = useRef(null)
   const [selected, setSelected] = useState(null)
+  const [projects, setProjects] = useState([])
+
+  useEffect(() => {
+    supabase
+      .from('projects')
+      .select('*')
+      .eq('visible', true)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data) setProjects(data)
+      })
+  }, [])
+
+  const localizedProjects = useMemo(() => {
+    return projects.map(p => ({
+      ...p,
+      name: lang === 'ar' && p.name_ar ? p.name_ar : p.name,
+      alt: lang === 'ar' && p.alt_ar ? p.alt_ar : p.alt,
+      description: lang === 'ar' && p.description_ar ? p.description_ar : p.description,
+      whatWeDid: lang === 'ar' && p.what_we_did_ar?.length ? p.what_we_did_ar : (p.what_we_did || []),
+      features: lang === 'ar' && p.features_ar?.length ? p.features_ar : (p.features || []),
+    }))
+  }, [projects, lang])
+
+  const slides = [...localizedProjects, ...localizedProjects, ...localizedProjects]
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, duration: 25, direction: isRTL ? 'rtl' : 'ltr' },
@@ -84,7 +58,9 @@ export default function Projects() {
 
   useEffect(() => {
     if (emblaApi) emblaApi.reInit()
-  }, [dark, emblaApi])
+  }, [dark, localizedProjects, emblaApi])
+
+  if (!localizedProjects.length) return null
 
   return (
     <section id="work" className="py-24 px-6 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>

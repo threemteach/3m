@@ -1,65 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Layers, Palette, Code, Gauge, Globe, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '../context/LanguageContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
 import useSEO from '../hooks/useSEO.js'
 import ProjectModal from '../components/ui/ProjectModal.jsx'
-
-const projects = [
-  {
-    name: 'Rent Go',
-    url: 'https://rent-go.ae/',
-    light: '/projects/rent_and_go_light.webp',
-    dark: '/projects/rent_and_go_dark.webp',
-    alt: 'Rent Go car rental booking platform homepage',
-    tag: 'Web App',
-    description: 'A full-featured car rental booking platform with real-time availability, fleet management, and online payments.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Booking Engine', 'Payment Integration', 'Admin Dashboard'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Stripe', 'Node.js'],
-    features: ['Real-time car availability', 'Online booking with payment', 'Fleet management dashboard', 'Multi-language support'],
-    icon: Globe,
-  },
-  {
-    name: 'Watan Alex',
-    url: 'https://watan-alex.netlify.app/',
-    light: '/projects/watan_alex_light.webp',
-    dark: '/projects/watan_alex_dark.webp',
-    alt: 'Watan Alex real estate property listings website',
-    tag: 'Web App',
-    description: 'A modern real estate platform showcasing property listings with advanced search, virtual tours, and agent profiles.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Property CMS', 'Map Integration', 'SEO Optimization'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Mapbox', 'Sanity CMS'],
-    features: ['Advanced property search', 'Interactive maps', 'Virtual tour support', 'Agent management system'],
-    icon: Layers,
-  },
-  {
-    name: 'Royal CCR',
-    url: 'https://royal-ccrs.vercel.app/',
-    light: '/projects/royal_ccr.webp',
-    dark: '/projects/royal_ccr.webp',
-    alt: 'Royal CCR construction and contracting services site',
-    tag: 'Web App',
-    description: 'A professional corporate website for a construction and contracting company showcasing their portfolio and services.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Portfolio Showcase', 'Contact System', 'Performance Optimization'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
-    features: ['Project portfolio gallery', 'Service showcase', 'Contact inquiry form', 'Fast loading performance'],
-    icon: Code,
-  },
-  {
-    name: 'Egyfield',
-    url: 'https://egyfield.com/',
-    light: '/projects/egyfield_light.webp',
-    dark: '/projects/egyfield_dark.webp',
-    alt: 'Egyfield oil and gas industry services website',
-    tag: 'Web App',
-    description: 'A B2B corporate website for an oil and gas services company, featuring their expertise, projects, and industry insights.',
-    whatWeDid: ['UI/UX Design', 'Frontend Development', 'Corporate CMS', 'Blog/News System', 'Multilingual Support'],
-    tech: ['React', 'Next.js', 'Tailwind CSS', 'Headless CMS', 'i18n'],
-    features: ['Corporate brand identity', 'News and insights blog', 'Project case studies', 'Arabic & English support'],
-    icon: Gauge,
-  },
-]
+import { supabase } from '../lib/supabase'
 
 export default function ProjectsPage() {
   const { t, lang } = useTranslation()
@@ -72,8 +18,32 @@ export default function ProjectsPage() {
   const [selected, setSelected] = useState(null)
   const [featuredIndex, setFeaturedIndex] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
+  const [projects, setProjects] = useState([])
   const timerRef = useRef(null)
   const isRTL = lang === 'ar'
+
+  useEffect(() => {
+    supabase
+      .from('projects')
+      .select('*')
+      .eq('visible', true)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data) setProjects(data)
+      })
+  }, [])
+
+  const localizedProjects = useMemo(() => {
+    return projects.map(p => ({
+      ...p,
+      name: lang === 'ar' && p.name_ar ? p.name_ar : p.name,
+      alt: lang === 'ar' && p.alt_ar ? p.alt_ar : p.alt,
+      description: lang === 'ar' && p.description_ar ? p.description_ar : p.description,
+      whatWeDid: lang === 'ar' && p.what_we_did_ar?.length ? p.what_we_did_ar : (p.what_we_did || []),
+      features: lang === 'ar' && p.features_ar?.length ? p.features_ar : (p.features || []),
+    }))
+  }, [projects, lang])
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 1024)
@@ -84,8 +54,9 @@ export default function ProjectsPage() {
 
   function startTimer() {
     clearInterval(timerRef.current)
+    if (!localizedProjects.length) return
     timerRef.current = setInterval(() => {
-      setFeaturedIndex(prev => (prev + 1) % projects.length)
+      setFeaturedIndex(prev => (prev + 1) % localizedProjects.length)
     }, 4500)
   }
 
@@ -93,7 +64,7 @@ export default function ProjectsPage() {
     if (!isDesktop) return
     startTimer()
     return () => clearInterval(timerRef.current)
-  }, [isDesktop])
+  }, [isDesktop, localizedProjects.length])
 
   function goTo(index) {
     clearInterval(timerRef.current)
@@ -101,15 +72,23 @@ export default function ProjectsPage() {
     startTimer()
   }
 
-  const goNext = () => goTo((featuredIndex + 1) % projects.length)
-  const goPrev = () => goTo((featuredIndex - 1 + projects.length) % projects.length)
+  const goNext = () => { if (!localizedProjects.length) return; goTo((featuredIndex + 1) % localizedProjects.length) }
+  const goPrev = () => { if (!localizedProjects.length) return; goTo((featuredIndex - 1 + localizedProjects.length) % localizedProjects.length) }
+
+  if (!localizedProjects.length) {
+    return (
+      <div className="min-h-screen pt-28 pb-24 px-6 flex items-center justify-center" style={{ background: 'var(--bg-primary)' }}>
+        <p className="text-sm" style={{ color: '#7a7f93' }}>No projects to show yet.</p>
+      </div>
+    )
+  }
 
   function ProjectCard({ project, featured, active, alwaysBorder, className = '' }) {
     return (
       <motion.button
         onClick={() => {
           if (featured) { setSelected(project); return }
-          goTo(projects.indexOf(project))
+          goTo(localizedProjects.indexOf(project))
           setTimeout(() => setSelected(project), 200)
         }}
         className={`group relative w-full text-left cursor-pointer overflow-hidden ${className}`}
@@ -192,7 +171,7 @@ export default function ProjectsPage() {
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.45, ease: 'easeInOut' }}
               >
-                <ProjectCard project={projects[featuredIndex]} featured />
+                <ProjectCard project={localizedProjects[featuredIndex]} featured />
               </motion.div>
             </AnimatePresence>
 
@@ -205,7 +184,7 @@ export default function ProjectsPage() {
           </div>
 
           <div className="grid grid-cols-4 gap-4">
-            {projects.map((p, i) => (
+            {localizedProjects.map((p, i) => (
               <ProjectCard key={i} project={p} active={i === featuredIndex} />
             ))}
           </div>
@@ -213,7 +192,7 @@ export default function ProjectsPage() {
 
         {/* Mobile: simple equal grid */}
         <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8">
-          {projects.map((p, i) => (
+          {localizedProjects.map((p, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
