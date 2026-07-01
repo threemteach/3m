@@ -7,18 +7,22 @@ ALTER TABLE projects
   ADD COLUMN IF NOT EXISTS features_ar JSONB DEFAULT '[]';
 
 -- Also add storage RLS policies if not done yet
-CREATE POLICY IF NOT EXISTS "Anyone can view project images"
+DROP POLICY IF EXISTS "Anyone can view project images" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can upload project images" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can delete project images" ON storage.objects;
+
+CREATE POLICY "Anyone can view project images"
   ON storage.objects FOR SELECT
   USING (bucket_id = 'projects');
 
-CREATE POLICY IF NOT EXISTS "Authenticated users can upload project images"
+CREATE POLICY "Authenticated users can upload project images"
   ON storage.objects FOR INSERT
   WITH CHECK (
     bucket_id = 'projects'
     AND auth.role() = 'authenticated'
   );
 
-CREATE POLICY IF NOT EXISTS "Authenticated users can delete project images"
+CREATE POLICY "Authenticated users can delete project images"
   ON storage.objects FOR DELETE
   USING (
     bucket_id = 'projects'
