@@ -42,7 +42,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 pb-24 md:pb-16">
         {/* Top row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
-          <div className="flex items-center gap-4">
+          <a href="/" onClick={e => { e.preventDefault(); window.location.reload() }} className="flex items-center gap-4 cursor-pointer">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
               alt="triple m"
@@ -54,7 +54,7 @@ export default function Footer() {
             }}>
               {t('footer.tagline')}
             </span>
-          </div>
+          </a>
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             {navLinks.map(l => (
               <button

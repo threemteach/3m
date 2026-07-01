@@ -48,7 +48,9 @@ export default function AdminLayout() {
         style={{ background: 'var(--bg-secondary)', borderRight: '1px solid var(--border)' }}
       >
         <div className="flex items-center gap-3 px-5 h-16 shrink-0" style={{ borderBottom: '1px solid var(--border)' }}>
-          <img src={logo} alt="triple m" className="h-7 w-auto" />
+          <a href="/" onClick={e => { e.preventDefault(); window.location.reload() }} className="cursor-pointer">
+            <img src={logo} alt="triple m" className="h-7 w-auto" />
+          </a>
           <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md ml-auto" style={{ background: 'rgba(195,74,54,0.15)', color: 'var(--accent-fire)' }}>
             {lang === 'ar' ? 'المشرف' : 'Admin'}
           </span>
