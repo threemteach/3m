@@ -117,7 +117,6 @@ const en = {
     label: 'OUR WORK', heading: 'Projects That Speak',
     desc: 'Every project tells a story. Here are some of our favorites.',
     viewAll: 'View All Projects',
-    tabs: ['Corporate', 'Real Estate', 'E-Commerce'],
   },
   whyMmm: {
     label: 'WHY TRIPLE M', heading: 'The triple m Edge',
@@ -282,7 +281,6 @@ const ar = {
     label: 'أعمالنا', heading: 'مشاريع تتحدث',
     desc: 'كل مشروع يحكي قصة. إليك بعض من مفضلاتنا.',
     viewAll: 'عرض جميع المشاريع',
-    tabs: ['شركات', 'عقارات', 'تجارة إلكترونية'],
   },
   whyMmm: {
     label: 'لماذا triple m', heading: 'ميزة triple m',
