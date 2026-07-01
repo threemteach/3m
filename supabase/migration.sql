@@ -43,29 +43,29 @@ ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
 
 -- 4. RLS policies for projects
 -- Anyone (even anonymous) can read visible projects
-CREATE POLICY "Anyone can read visible projects"
+CREATE POLICY IF NOT EXISTS "Anyone can read visible projects"
   ON projects FOR SELECT
   USING (visible = true);
 
 -- Any authenticated user is admin (login page is private, no public sign-up)
-CREATE POLICY "Authenticated users can read all projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can read all projects"
   ON projects FOR SELECT
   USING (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can insert projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can insert projects"
   ON projects FOR INSERT
   WITH CHECK (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can update projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can update projects"
   ON projects FOR UPDATE
   USING (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can delete projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can delete projects"
   ON projects FOR DELETE
   USING (auth.role() = 'authenticated');
 
 -- 5. RLS policies for admins table (kept for audit, but no longer required by app)
-CREATE POLICY "Users can read own admin record"
+CREATE POLICY IF NOT EXISTS "Users can read own admin record"
   ON admins FOR SELECT
   USING (auth.uid() = id);
 

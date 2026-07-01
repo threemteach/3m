@@ -7,7 +7,8 @@
 --    Before: any authenticated user could list all admin emails/UUIDs
 --    After: only the current user can see their own admin record
 DROP POLICY IF EXISTS "Authenticated users can read admins" ON admins;
-CREATE POLICY "Users can read own admin record"
+DROP POLICY IF EXISTS "Users can read own admin record" ON admins;
+CREATE POLICY IF NOT EXISTS "Users can read own admin record"
   ON admins FOR SELECT
   USING (auth.uid() = id);
 
@@ -31,35 +32,41 @@ DROP POLICY IF EXISTS "Admins can read all projects" ON projects;
 DROP POLICY IF EXISTS "Admins can insert projects" ON projects;
 DROP POLICY IF EXISTS "Admins can update projects" ON projects;
 DROP POLICY IF EXISTS "Admins can delete projects" ON projects;
+DROP POLICY IF EXISTS "Authenticated users can read all projects" ON projects;
+DROP POLICY IF EXISTS "Authenticated users can insert projects" ON projects;
+DROP POLICY IF EXISTS "Authenticated users can update projects" ON projects;
+DROP POLICY IF EXISTS "Authenticated users can delete projects" ON projects;
 
-CREATE POLICY "Authenticated users can read all projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can read all projects"
   ON projects FOR SELECT
   USING (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can insert projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can insert projects"
   ON projects FOR INSERT
   WITH CHECK (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can update projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can update projects"
   ON projects FOR UPDATE
   USING (auth.role() = 'authenticated');
 
-CREATE POLICY "Authenticated users can delete projects"
+CREATE POLICY IF NOT EXISTS "Authenticated users can delete projects"
   ON projects FOR DELETE
   USING (auth.role() = 'authenticated');
 
 -- Storage: same simplification
 DROP POLICY IF EXISTS "Admins can upload project images" ON storage.objects;
 DROP POLICY IF EXISTS "Admins can delete project images" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can upload project images" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can delete project images" ON storage.objects;
 
-CREATE POLICY "Authenticated users can upload project images"
+CREATE POLICY IF NOT EXISTS "Authenticated users can upload project images"
   ON storage.objects FOR INSERT
   WITH CHECK (
     bucket_id = 'projects'
     AND auth.role() = 'authenticated'
   );
 
-CREATE POLICY "Authenticated users can delete project images"
+CREATE POLICY IF NOT EXISTS "Authenticated users can delete project images"
   ON storage.objects FOR DELETE
   USING (
     bucket_id = 'projects'
