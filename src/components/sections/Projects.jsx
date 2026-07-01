@@ -88,7 +88,7 @@ export default function Projects() {
                   <div
                     className="portfolio-card"
                     style={{
-                      backgroundImage: `url(${dark ? p.dark : p.light})`,
+                      backgroundImage: `url(${dark ? (p.dark || p.light) : (p.light || p.dark)})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'top center',
                       backgroundRepeat: 'no-repeat',

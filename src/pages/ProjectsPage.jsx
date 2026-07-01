@@ -107,7 +107,7 @@ export default function ProjectsPage() {
         onMouseEnter={e => { e.currentTarget.style.backgroundPosition = 'bottom center' }}
         onMouseLeave={e => { e.currentTarget.style.backgroundPosition = 'top center' }}
         style={{
-          backgroundImage: `url(${dark ? project.dark : project.light})`,
+          backgroundImage: `url(${dark ? (project.dark || project.light) : (project.light || project.dark)})`,
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
