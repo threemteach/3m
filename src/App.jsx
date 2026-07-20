@@ -19,6 +19,7 @@ import Team from './components/sections/Team.jsx'
 import CTA from './components/sections/CTA.jsx'
 import StructuredData from './components/seo/StructuredData.jsx'
 import useSEO from './hooks/useSEO.js'
+import { useTranslation } from './context/LanguageContext.jsx'
 
 const NavContext = createContext()
 
@@ -38,9 +39,12 @@ function PageWrap({ children }) {
 }
 
 function Home() {
+  const { lang } = useTranslation()
   useSEO({
-    title: 'Home',
-    description: 'Dream it and we build it. triple m crafts web apps, Shopify stores, MVPs, and UI/UX designs for businesses in Egypt.',
+    title: lang === 'ar' ? 'الرئيسية' : 'Home',
+    description: lang === 'ar'
+      ? '3M tech يبني تطبيقات ويب مخصصة ومتاجر شوبيفاي ومنصات تجارة إلكترونية ونماذج MVP وتصميمات UI/UX للشركات والSTARTUPS في مصر والشرق الأوسط.'
+      : '3M tech builds custom web apps, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.',
     path: '/',
   })
   return (
@@ -66,6 +70,7 @@ function Home() {
 }
 
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
+const AboutPage = lazy(() => import('./pages/About.jsx'))
 const PrivacyPage = lazy(() => import('./pages/Privacy.jsx'))
 const TermsPage = lazy(() => import('./pages/Terms.jsx'))
 const NotFoundPage = lazy(() => import('./pages/NotFound.jsx'))
@@ -131,6 +136,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Suspense fallback={<PageLoader />}><PageWrap><ProjectsPage /></PageWrap></Suspense>} />
+          <Route path="/about" element={<Suspense fallback={<PageLoader />}><PageWrap><AboutPage /></PageWrap></Suspense>} />
           <Route path="/privacy" element={<Suspense fallback={<PageLoader />}><PageWrap><PrivacyPage /></PageWrap></Suspense>} />
           <Route path="/terms" element={<Suspense fallback={<PageLoader />}><PageWrap><TermsPage /></PageWrap></Suspense>} />
           <Route path="*" element={<Suspense fallback={<PageLoader />}><PageWrap><NotFoundPage /></PageWrap></Suspense>} />

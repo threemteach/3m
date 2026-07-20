@@ -1,0 +1,39 @@
+# 3M tech
+
+> 3M tech is a digital craftsmanship studio based in Egypt that builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.
+
+## About
+
+3M tech (3M tech) is a small, focused software development studio founded by three co-founders in Egypt. We specialize in building custom web applications, e-commerce platforms, Shopify stores, minimum viable products (MVPs), and providing UI/UX design services. Our team consists of Mohamed Ramy Elmagrby (Co-Founder & Web Developer), Mahmoud Magdy Hussien (Co-Founder & Web Developer), and Moataz Gomaa (Co-Founder & Creative Designer).
+
+## Services
+
+- **Web Applications**: Custom web apps, dashboards, booking systems, internal tools, and customer portals built with React, Next.js, and Supabase.
+- **E-Commerce**: Custom online stores with Supabase backends, Paymob/Stripe payments, optimized for the Egyptian market.
+- **Shopify Stores**: Professional Shopify store setup with custom themes, product configuration, and payment/shipping integration.
+- **MVP Development**: Fast minimum viable products for founders and startups to validate ideas with real users or investors.
+- **UI/UX Design**: Custom Figma designs, wireframes, design systems, and developer handoff.
+
+## Tech Stack
+
+- Frontend: React, Next.js, Vite, Tailwind CSS
+- Backend: Supabase (PostgreSQL, Auth, Storage)
+- Payments: Paymob, Stripe
+- Design: Figma
+- Deployment: Vercel
+
+## Contact
+
+- Website: https://3mtechs.com
+- Email: Via contact form at https://3mtechs.com
+- Phone: +201061883470
+- Facebook: https://www.facebook.com/profile.php?id=61590725834401
+- Instagram: https://www.instagram.com/3m_.tech/
+
+## Location
+
+Egypt (serving clients in Egypt and the Middle East)
+
+## Turnaround
+
+Most projects are completed within 1-4 weeks depending on complexity. MVPs can be delivered in as little as 2 weeks.

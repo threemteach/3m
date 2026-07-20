@@ -34,6 +34,10 @@ export default function Navbar() {
       if (!isProjectsPage) navigate('/projects')
       return
     }
+    if (id === 'about-page') {
+      navigate('/about')
+      return
+    }
     if (isProjectsPage) {
       navigate('/')
       const timer = setInterval(() => {
@@ -50,7 +54,7 @@ export default function Navbar() {
 
   const links = [
     { id: 'services', label: t('nav.services'), page: false },
-    { id: 'about', label: t('nav.about'), page: false },
+    { id: 'about-page', label: t('nav.about'), page: true },
     { id: 'process', label: t('nav.process'), page: false },
     { id: 'team', label: t('nav.team'), page: false },
     { id: 'contact', label: t('nav.contact'), page: false },
@@ -77,7 +81,7 @@ export default function Navbar() {
             }}
           >
             <a href="/" className="flex items-center no-underline shrink-0">
-              <img src="/logos/Orange.svg" alt="triple m — Digital Craftsmanship Studio" className="h-7 w-auto" />
+              <img src="/logos/Orange.svg" alt="3M tech — Digital Craftsmanship Studio" className="h-7 w-auto" />
             </a>
 
               <div className="hidden md:flex items-center gap-0">
@@ -154,7 +158,7 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between h-16 px-6">
               <a href="/" className="flex items-center no-underline">
-                <img src="/logos/Orange.svg" alt="triple m — Digital Craftsmanship Studio" className="h-7 w-auto" />
+                <img src="/logos/Orange.svg" alt="3M tech — Digital Craftsmanship Studio" className="h-7 w-auto" />
               </a>
               <button onClick={() => setOpen(false)} className="bg-transparent border-none cursor-pointer p-2" aria-label="Close menu">
                 <X size={24} style={{ color: '#FFF7E9' }} />

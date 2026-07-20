@@ -119,7 +119,7 @@ const en = {
     viewAll: 'View All Projects',
   },
   whyMmm: {
-    label: 'WHY TRIPLE M', heading: 'The triple m Edge',
+    label: 'WHY 3M TECH', heading: 'The 3M tech Edge',
     desc: "Here's what makes us different.",
     cards: [
       { title: 'Speed to Market', us: 'A working site in 1-2 weeks.', them: 'Months of agency back-and-forth',
@@ -136,7 +136,7 @@ const en = {
         detail: "We build with tools that are widely used and easy for any future developer to pick up — your site isn't locked into us forever." },
     ],
     bottomLine: "Clear on scope, honest about timeline, and built around your real business goal.",
-    badgeUs: 'triple m', badgeThem: 'Others',
+    badgeUs: '3M tech', badgeThem: 'Others',
   },
   process: {
     label: 'HOW WE WORK', heading: 'Our Process',
@@ -283,7 +283,7 @@ const ar = {
     viewAll: 'عرض جميع المشاريع',
   },
   whyMmm: {
-    label: 'لماذا triple m', heading: 'ميزة triple m',
+    label: 'لماذا 3M tech', heading: 'ميزة 3M tech',
     desc: 'هذا ما يميزنا.',
     cards: [
       { title: 'السرعة في الوصول للسوق', us: 'موقع شغال خلال أسبوع إلى أسبوعين.', them: 'أشهر من التنسيق مع الوكالة',
@@ -300,7 +300,7 @@ const ar = {
         detail: 'نبني باستخدام أدوات منتشرة وسهلة على أي مطور آخر التعامل معها لاحقًا — موقعك ليس مرتبطًا بنا إلى الأبد.' },
     ],
     bottomLine: 'واضحون بشأن النطاق، صادقون في المدة، وكل شيء مبني حول هدف عملك الحقيقي.',
-    badgeUs: 'triple m', badgeThem: 'آخرون',
+    badgeUs: '3M tech', badgeThem: 'آخرون',
   },
   process: {
     label: 'كيف نعمل', heading: 'منهجية العمل',

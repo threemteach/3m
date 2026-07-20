@@ -12,7 +12,7 @@ export default function ProjectsPage() {
   const { dark } = useTheme()
   useSEO({
     title: lang === 'en' ? 'Our Work' : 'أعمالنا',
-    description: lang === 'en' ? 'Explore our portfolio of web apps, e-commerce platforms, and Shopify stores built for businesses in Egypt and beyond.' : 'تصفح أعمالنا من تطبيقات الويب ومنصات التجارة الإلكترونية ومتاجر Shopify التي بنيناها للشركات في مصر وخارجها.',
+    description: lang === 'en' ? 'Explore our portfolio of custom web apps, e-commerce platforms, Shopify stores, and MVPs built for businesses in Egypt and the Middle East.' : 'تصفّح معرض أعمالنا من تطبيقات الويب المخصصة ومنصات التجارة الإلكترونية ومتاجر Shopify ونماذج MVP التي أنشأناها للشركات في مصر والشرق الأوسط.',
     path: '/projects',
   })
   const [selected, setSelected] = useState(null)

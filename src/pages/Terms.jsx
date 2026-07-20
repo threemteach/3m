@@ -5,7 +5,7 @@ export default function Terms() {
   const { lang } = useTranslation()
   useSEO({
     title: lang === 'en' ? 'Terms of Service' : 'شروط الخدمة',
-    description: lang === 'en' ? 'triple m terms of service — the terms governing the use of our website and services.' : 'شروط خدمة triple m — الشروط التي تنظم استخدام موقعنا وخدماتنا.',
+    description: lang === 'en' ? '3M tech terms of service — the terms and conditions governing the use of our website, web development, and design services.' : 'شروط خدمة 3M tech — الشروط والأحكام التي تنظم استخدام موقعنا وخدمات تطوير وتصميم المواقع.',
     path: '/terms',
   })
 
@@ -26,7 +26,7 @@ export default function Terms() {
             </section>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>3. الملكية الفكرية</h2>
-              <p>يحتفظ triple m بحقوق الملكية الفكرية لجميع الأعمال حتى يتم السداد الكامل. بعد السداد، تنتقل جميع الحقوق إلى العميل.</p>
+              <p>يحتفظ 3M tech بحقوق الملكية الفكرية لجميع الأعمال حتى يتم السداد الكامل. بعد السداد، تنتقل جميع الحقوق إلى العميل.</p>
             </section>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>4. إخلاء المسؤولية</h2>
@@ -58,7 +58,7 @@ export default function Terms() {
           </section>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>3. Intellectual Property</h2>
-            <p>triple m retains intellectual property rights to all work until full payment is received. Upon payment, all rights transfer to the client.</p>
+            <p>3M tech retains intellectual property rights to all work until full payment is received. Upon payment, all rights transfer to the client.</p>
           </section>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>4. Disclaimer</h2>

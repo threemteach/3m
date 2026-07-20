@@ -50,7 +50,7 @@ export default function AdminLogin() {
         <div className="rounded-2xl p-8" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', boxShadow: '0 25px 60px rgba(0,0,0,0.15)' }}>
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-5 p-3" style={{ background: 'rgba(195,74,54,0.1)' }}>
-              <img src={logo} alt="triple m" className="w-full h-full object-contain" />
+              <img src={logo} alt="3M tech" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
               {lang === 'ar' ? 'مرحباً بعودتك' : 'Welcome back'}

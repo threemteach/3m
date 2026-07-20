@@ -38,8 +38,8 @@ export function LanguageProvider({ children }) {
     document.documentElement.lang = lang
     document.documentElement.classList.toggle('rtl', dir === 'rtl')
     document.title = lang === 'ar'
-      ? 'triple m — استوديو صناعة البرمجيات الرقمية'
-      : 'triple m — Digital Craftsmanship Studio'
+      ? '3M tech — استوديو صناعة البرمجيات الرقمية'
+      : '3M tech — Digital Craftsmanship Studio'
   }, [lang])
 
   const t = useCallback((key) => {

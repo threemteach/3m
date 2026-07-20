@@ -45,7 +45,7 @@ export default function Footer() {
           <a href="/" onClick={e => { e.preventDefault(); window.location.reload() }} className="flex items-center gap-4 cursor-pointer">
             <img
               src={dark ? '/logos/White.svg' : '/logos/dark%20purp.svg'}
-              alt="triple m"
+              alt="3M tech"
               className="h-7 w-auto"
             />
             <span className="hidden sm:inline text-sm font-medium px-3 py-1 rounded-full" style={{
@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-            &copy; 2026 triple m &middot; {t('footer.rights')}
+            &copy; 2026 3M tech &middot; {t('footer.rights')}
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy" className="text-xs transition-colors no-underline hover:text-[var(--accent-fire)]" style={{ color: 'var(--text-muted)' }}>

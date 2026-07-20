@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 
-export default function useSEO({ title, description, path, ogImage }) {
+const SITE_URL = 'https://3mtechs.com'
+const SITE_NAME = '3M tech'
+const DEFAULT_OG = `${SITE_URL}/og-logo.png`
+
+export default function useSEO({ title, description, path, ogImage, noindex = false }) {
   useEffect(() => {
-    const siteName = 'triple m'
-    const fullTitle = title ? `${title} | ${siteName}` : siteName
-    const url = `https://triple-mt.vercel.app${path || ''}`
-    const image = ogImage || '/og-image.png'
+    const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
+    const url = `${SITE_URL}${path || ''}`
+    const image = ogImage ? (ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`) : DEFAULT_OG
 
     document.title = fullTitle
 
@@ -15,6 +18,7 @@ export default function useSEO({ title, description, path, ogImage }) {
     }
 
     setMeta('meta[name="description"]', 'content', description || '')
+    setMeta('meta[name="robots"]', 'content', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1')
     setMeta('meta[property="og:title"]', 'content', fullTitle)
     setMeta('meta[property="og:description"]', 'content', description || '')
     setMeta('meta[property="og:url"]', 'content', url)
@@ -23,5 +27,5 @@ export default function useSEO({ title, description, path, ogImage }) {
     setMeta('meta[name="twitter:description"]', 'content', description || '')
     setMeta('meta[name="twitter:image"]', 'content', image)
     setMeta('link[rel="canonical"]', 'href', url)
-  }, [title, description, path, ogImage])
+  }, [title, description, path, ogImage, noindex])
 }

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Disallow: /admin
 
-Sitemap: https://triple-mt.vercel.app/sitemap.xml
+Sitemap: https://3mtechs.com/sitemap.xml

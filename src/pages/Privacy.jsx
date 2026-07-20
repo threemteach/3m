@@ -5,7 +5,7 @@ export default function Privacy() {
   const { lang } = useTranslation()
   useSEO({
     title: lang === 'en' ? 'Privacy Policy' : 'سياسة الخصوصية',
-    description: lang === 'en' ? 'triple m privacy policy — how we collect, use, and protect your personal information.' : 'سياسة الخصوصية لـ triple m — كيف نجمع ونستخدم ونحمي معلوماتك الشخصية.',
+    description: lang === 'en' ? '3M tech privacy policy — learn how we collect, use, and protect your personal information when you use our web development and design services.' : 'سياسة الخصوصية لـ 3M tech — تعرّف على كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدمات تطوير وتصميم المواقع الخاصة بنا.',
     path: '/privacy',
   })
 
@@ -18,7 +18,7 @@ export default function Privacy() {
             <p>آخر تحديث: يونيو 2026</p>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>1. المقدمة</h2>
-              <p>نحن في triple m نلتزم بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام موقعنا.</p>
+              <p>نحن في 3M tech نلتزم بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام موقعنا.</p>
             </section>
             <section>
               <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>2. المعلومات التي نجمعها</h2>
@@ -54,7 +54,7 @@ export default function Privacy() {
           <p>Last updated: June 2026</p>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>1. Introduction</h2>
-            <p>At triple m, we are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information when you use our website.</p>
+            <p>At 3M tech, we are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information when you use our website.</p>
           </section>
           <section>
             <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>2. Information We Collect</h2>

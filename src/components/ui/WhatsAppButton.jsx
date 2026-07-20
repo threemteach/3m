@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
 const WHATSAPP_NUMBER = '201061883470'
-const WHATSAPP_MSG = encodeURIComponent("Hi triple m! I'd like to discuss a project.")
+const WHATSAPP_MSG = encodeURIComponent("Hi 3M tech! I'd like to discuss a project.")
 
 function WhatsAppLink({ children, className, onClick, ariaLabel }) {
   return (

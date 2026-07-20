@@ -49,7 +49,7 @@ export default function AdminLayout() {
       >
         <div className="flex items-center gap-3 px-5 h-16 shrink-0" style={{ borderBottom: '1px solid var(--border)' }}>
           <a href="/" onClick={e => { e.preventDefault(); window.location.reload() }} className="cursor-pointer">
-            <img src={logo} alt="triple m" className="h-7 w-auto" />
+            <img src={logo} alt="3M tech" className="h-7 w-auto" />
           </a>
           <span className="text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md ml-auto" style={{ background: 'rgba(195,74,54,0.15)', color: 'var(--accent-fire)' }}>
             {lang === 'ar' ? 'المشرف' : 'Admin'}
@@ -95,7 +95,7 @@ export default function AdminLayout() {
             <Menu size={18} />
           </button>
           <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-            <span>{lang === 'ar' ? 'triple m' : 'triple m'}</span>
+            <span>{lang === 'ar' ? '3M tech' : '3M tech'}</span>
             <ChevronRight size={11} />
             <span style={{ color: 'var(--accent-fire)' }}>{pageTitle}</span>
           </div>

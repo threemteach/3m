@@ -131,7 +131,7 @@ export default function SplashScreen({ onFinish }) {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <img src={logo} alt="triple m" className="w-28 h-28 md:w-36 md:h-36" />
+              <img src={logo} alt="3M tech" className="w-28 h-28 md:w-36 md:h-36" />
             </motion.div>
 
             <div className="flex flex-col items-center gap-3">

@@ -5,7 +5,7 @@ import useSEO from '../hooks/useSEO.js'
 
 export default function NotFound() {
   const { t, dir } = useTranslation()
-  useSEO({ title: '404', description: 'Page not found', path: '' })
+  useSEO({ title: '404', description: 'Page not found', path: '', noindex: true })
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>

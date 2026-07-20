@@ -4,50 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>triple m — Digital Craftsmanship Studio</title>
+    <title>3M tech — Custom Web Apps, Shopify & E-Commerce Development in Egypt</title>
     <meta
       name="description"
-      content="Dream it and we build it. triple m crafts web apps, Shopify stores, and MVPs that drive business growth."
+      content="3M tech builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East. Get a free consultation today."
     />
     <meta
       name="keywords"
-      content="web development, Shopify, e-commerce, MVPs, UI/UX design, software agency Egypt, digital studio"
+      content="web development Egypt, software agency Egypt, Shopify store setup, e-commerce development, MVP development, UI/UX design, custom web apps, digital studio Egypt, تطوير مواقع, شركة برمجيات مصر, تصميم مواقع, تطوير تطبيقات ويب, متجر شوبيفاي, تصميم واجهات مستخدم, تطوير تطبيقات موبايل, شركة تقنية مصر, برمجة مواقع, تطوير منتجات رقمية, تصميم تجربة مستخدم, منصة تجارة إلكترونية, وكالة تسويق رقمي, برمجيات مخصصة, داشبورد إداري, نظام حجز, متجر إلكتروني, تصميم لوجو, هوية بصرية, تطوير MVP, نماذج أولية, تطوير ويب سات, فريلانسر ويب, شركة ويب مصر, أفضل شركة برمجيات, تطوير مواقع احترافي, تصميم مواقع متجاوبة, تطوير تطبيقات React, تطوير واجهات أمامية, تطوير خلفية APIs, قواعد بيانات, Supabase, Firebase, cloud hosting, SEO, تحسين محركات البحث, تسويق إلكتروني, إدارة محتوى, WordPress, Shopify expert, egypt software company, arabic web development, middle east tech, cairo startup, سيليكون وادي النيل, ريادة أعمال, ستارت أب, تقنية المعلومات, شركة تطوير تطبيقات, شركة ويب في مصر, أفضل شركة تصميم مواقع"
     />
-    <meta name="author" content="triple m" />
-    <meta name="robots" content="index, follow" />
+    <meta name="author" content="3M tech" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#4A3A8C" />
-    <link rel="canonical" href="https://triple-mt.vercel.app/" />
-    <link rel="alternate" href="https://triple-mt.vercel.app/" hreflang="en" />
-    <link rel="alternate" href="https://triple-mt.vercel.app/ar" hreflang="ar" />
-    <link rel="alternate" href="https://triple-mt.vercel.app/" hreflang="x-default" />
+    <link rel="canonical" href="https://3mtechs.com/" />
 
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="triple m — Digital Craftsmanship Studio"
+      content="3M tech — Custom Web Apps, Shopify & E-Commerce Development in Egypt"
     />
     <meta
       property="og:description"
-      content="Dream it and we build it. triple m crafts web apps, Shopify stores, and MVPs that drive business growth."
+      content="3M tech builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East."
     />
-    <meta property="og:url" content="https://triple-mt.vercel.app/" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://3mtechs.com/" />
+    <meta property="og:image" content="https://3mtechs.com/og-logo.png" />
+    <meta property="og:image:alt" content="3M tech — Custom Web Apps, Shopify & E-Commerce Development" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="triple m" />
+    <meta property="og:locale:alternate" content="ar_EG" />
+    <meta property="og:site_name" content="3M tech" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="triple m — Digital Craftsmanship Studio"
+      content="3M tech — Custom Web Apps, Shopify & E-Commerce Development in Egypt"
     />
     <meta
       name="twitter:description"
-      content="Dream it and we build it. triple m crafts web apps, Shopify stores, and MVPs that drive business growth."
+      content="3M tech builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East."
     />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content="https://3mtechs.com/og-logo.png" />
 
+    <link rel="icon" type="image/png" href="/logo-512.png" />
+    <link rel="apple-touch-icon" href="/logo-512.png" />
     <link rel="icon" type="image/svg+xml" href="/logos/Orange.svg" />
-    <link rel="apple-touch-icon" href="/logos/Orange.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -70,6 +72,38 @@
       })();
     </script>
 
+    <script>
+      !(function () {
+        try {
+          var cached = document.cookie.split('; ').find(function(r) { return r.startsWith('lang='); });
+          var lang = cached ? cached.split('=')[1] : null;
+          if (!lang) {
+            var navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            lang = navLang.indexOf('ar') === 0 ? 'ar' : 'en';
+            document.cookie = 'lang=' + lang + ';path=/;max-age=31536000;SameSite=Lax';
+          }
+          var isAr = lang === 'ar';
+          document.documentElement.lang = lang;
+          document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+          if (isAr) {
+            var metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', '3M tech يبني تطبيقات ويب مخصصة ومتاجر شوبيفاي ومنصات تجارة إلكترونية ونماذج MVP وتصميمات UI/UX للشركات والSTARTUPS في مصر والشرق الأوسط.');
+            var ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.setAttribute('content', '3M tech — تطبيقات ويب مخصصة وشوبيفاي والتجارة الإلكترونية في مصر');
+            var ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.setAttribute('content', '3M tech يبني تطبيقات ويب مخصصة ومتاجر شوبيفاي ومنصات تجارة إلكترونية ونماذج MVP وتصميمات UI/UX للشركات والSTARTUPS في مصر والشرق الأوسط.');
+            var twTitle = document.querySelector('meta[name="twitter:title"]');
+            if (twTitle) twTitle.setAttribute('content', '3M tech — تطبيقات ويب مخصصة وشوبيفاي والتجارة الإلكترونية في مصر');
+            var twDesc = document.querySelector('meta[name="twitter:description"]');
+            if (twDesc) twDesc.setAttribute('content', '3M tech يبني تطبيقات ويب مخصصة ومتاجر شوبيفاي ومنصات تجارة إلكترونية ونماذج MVP وتصميمات UI/UX للشركات والSTARTUPS في مصر والشرق الأوسط.');
+            var title = document.querySelector('title');
+            if (title) title.textContent = '3M tech — تطبيقات ويب مخصصة وشوبيفاي والتجارة الإلكترونية في مصر';
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G47N2LHNFJ"></script>
     <script>
@@ -80,7 +114,15 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+          <h1>3M tech — Custom Web Apps, Shopify & E-Commerce Development in Egypt</h1>
+          <p>We build custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for businesses in Egypt and the Middle East.</p>
+          <p>Please enable JavaScript to use this site.</p>
+        </div>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

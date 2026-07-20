@@ -57,8 +57,8 @@ export default function Team() {
           </h2>
           <p className="mt-3 max-w-xl mx-auto text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
             {lang === 'ar'
-              ? 'تعرّف على العقول المبدعة وراء نجاح triple m.'
-              : 'Meet the creative minds behind triple m.'}
+              ? 'تعرّف على العقول المبدعة وراء نجاح 3M tech.'
+              : 'Meet the creative minds behind 3M tech.'}
           </p>
         </motion.div>
 

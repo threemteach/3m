@@ -18,7 +18,7 @@ export default function PageLoader() {
     >
       <motion.img
         src={logo}
-        alt="triple m"
+        alt="3M tech"
         className="w-20 h-20 md:w-28 md:h-28"
         animate={{ scale: [1, 1.08, 1] }}
         transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
