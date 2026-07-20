@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense, useEffect, useState, useRef, createContext, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
@@ -118,6 +119,7 @@ function App() {
             <Route path="projects/:id/edit" element={<AdminProjectForm />} />
           </Route>
         </Routes>
+        <Analytics />
       </Suspense>
     )
   }
@@ -144,6 +146,7 @@ function App() {
       </AnimatePresence>
       <Footer />
       <WhatsAppButton />
+      <Analytics />
     </NavContext.Provider>
   )
 }
