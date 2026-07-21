@@ -6,7 +6,7 @@ import NavControls from '../ui/NavControls.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
-const sectionIds = ['hero', 'services', 'about', 'process', 'team', 'contact']
+const sectionIds = ['hero', 'services', 'process', 'team', 'contact']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)

@@ -27,7 +27,6 @@ export default function Footer() {
     { label: t('footer.servicesLink'), id: 'services' },
     { label: t('footer.process'), id: 'process' },
     { label: t('footer.projects'), id: 'work' },
-    { label: t('footer.aboutUs'), id: 'about' },
     { label: t('footer.team'), id: 'team' },
     { label: t('footer.contact'), id: 'contact' },
   ]

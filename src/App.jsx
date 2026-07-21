@@ -13,7 +13,6 @@ import PageLoader from './components/ui/PageLoader.jsx'
 import Marquee from './components/sections/Marquee.jsx'
 import Services from './components/sections/Services.jsx'
 import SectionDivider from './components/ui/SectionDivider.jsx'
-import WhyMmm from './components/sections/WhyMmm.jsx'
 import Projects from './components/sections/Projects.jsx'
 import Process from './components/sections/Process.jsx'
 import Team from './components/sections/Team.jsx'
@@ -57,8 +56,6 @@ function Home() {
         <Services />
         <SectionDivider />
         <Projects />
-        <SectionDivider flip />
-        <WhyMmm />
         <SectionDivider flip />
         <Process />
         <SectionDivider />

@@ -118,26 +118,7 @@ const en = {
     desc: 'Every project tells a story. Here are some of our favorites.',
     viewAll: 'View All Projects',
   },
-  whyMmm: {
-    label: 'WHY 3M TECH', heading: 'The 3M tech Edge',
-    desc: "Here's what makes us different.",
-    cards: [
-      { title: 'Speed to Market', us: 'A working site in 1-2 weeks.', them: 'Months of agency back-and-forth',
-        detail: "We're a small, focused team — no internal hand-offs, no waiting on five departments. You get a working result fast, then we refine it with you." },
-      { title: 'Clear Scope, No Surprises', us: 'Fixed scope and price, agreed in writing before we start.', them: 'Vague quotes that grow mid-project',
-        detail: "You know exactly what you're getting and what it costs before any work begins. If something changes, we talk about it — we don't just bill you for it." },
-      { title: 'Direct Access to Your Builders', us: 'You message the people actually building your site.', them: 'Account managers relaying messages',
-        detail: "No middlemen. You're on WhatsApp directly with the designer and developer working on your project." },
-      { title: 'Designed to Get Results', us: 'Every page designed around what gets you leads or sales.', them: "Pretty pages that don't convert",
-        detail: 'A nice design is the starting point, not the goal. We design with your actual business outcome in mind — bookings, calls, or sales.' },
-      { title: 'Real Communication', us: 'Regular updates, real answers.', them: 'Silence after the deposit',
-        detail: "You'll hear from us with real progress, not just when we need something from you." },
-      { title: 'Modern, Maintainable Tech', us: 'React, Next.js, Supabase — built to last.', them: 'Outdated stacks that are hard to update later',
-        detail: "We build with tools that are widely used and easy for any future developer to pick up — your site isn't locked into us forever." },
-    ],
-    bottomLine: "Clear on scope, honest about timeline, and built around your real business goal.",
-    badgeUs: '3M tech', badgeThem: 'Others',
-  },
+
   process: {
     label: 'HOW WE WORK', heading: 'Our Process',
     steps: [
@@ -282,26 +263,7 @@ const ar = {
     desc: 'كل مشروع يحكي قصة. إليك بعض من مفضلاتنا.',
     viewAll: 'عرض جميع المشاريع',
   },
-  whyMmm: {
-    label: 'لماذا 3M tech', heading: 'ميزة 3M tech',
-    desc: 'هذا ما يميزنا.',
-    cards: [
-      { title: 'السرعة في الوصول للسوق', us: 'موقع شغال خلال أسبوع إلى أسبوعين.', them: 'أشهر من التنسيق مع الوكالة',
-        detail: 'نحن فريق صغير ومركّز — بدون تسليم داخلي بين أقسام، وبدون انتظار لخمس إدارات. تحصل على نتيجة شغالة بسرعة، ثم نطورها معك.' },
-      { title: 'نطاق عمل واضح بدون مفاجآت', us: 'نطاق وسعر محددان كتابةً قبل البدء.', them: 'عروض أسعار غامضة تكبر أثناء المشروع',
-        detail: 'تعرف بدقة ماذا ستحصل عليه وما تكلفته قبل بدء أي عمل. وإذا تغيّر أي شيء، نناقشه معك بوضوح بدلاً من إضافته لفاتورتك دون تنبيه.' },
-      { title: 'تواصل مباشر مع من يبني مشروعك', us: 'تتواصل مباشرة مع من يبني موقعك فعليًا.', them: 'مدراء حسابات ينقلون الرسائل بالنيابة',
-        detail: 'بدون وسطاء. تتواصل مباشرة عبر واتساب مع المصمم والمطور المسؤولين فعليًا عن مشروعك.' },
-      { title: 'تصميم مبني على تحقيق نتائج', us: 'كل صفحة مصممة لتحقق لك عملاء أو مبيعات.', them: 'تصميم جميل بدون تحويلات فعلية',
-        detail: 'التصميم الجميل نقطة بداية، وليس الهدف النهائي. نصمم بناءً على الهدف التجاري الفعلي لموقعك — حجوزات، اتصالات، أو مبيعات.' },
-      { title: 'تواصل حقيقي', us: 'تحديثات منتظمة وردود حقيقية.', them: 'صمت بعد استلام الدفعة',
-        detail: 'تسمع منّا بتحديثات حقيقية عن تقدّم العمل، وليس فقط عندما نحتاج شيئًا منك.' },
-      { title: 'تقنيات حديثة وقابلة للصيانة', us: 'React وNext.js وSupabase — أدوات تدوم.', them: 'تقنيات قديمة يصعب تطويرها لاحقًا',
-        detail: 'نبني باستخدام أدوات منتشرة وسهلة على أي مطور آخر التعامل معها لاحقًا — موقعك ليس مرتبطًا بنا إلى الأبد.' },
-    ],
-    bottomLine: 'واضحون بشأن النطاق، صادقون في المدة، وكل شيء مبني حول هدف عملك الحقيقي.',
-    badgeUs: '3M tech', badgeThem: 'آخرون',
-  },
+
   process: {
     label: 'كيف نعمل', heading: 'منهجية العمل',
     steps: [
