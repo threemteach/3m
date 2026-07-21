@@ -16,6 +16,77 @@ const tagOptions = ['Web App', 'UI/UX', 'Mobile App', 'Shopify Store', 'Branding
 
 const LANG = { EN: 'en', AR: 'ar' }
 
+function Field({ label, fieldKey, placeholder, as, rows, suffix, value, isAr, langTab, onChange }) {
+  const inputId = `${label.toLowerCase().replace(/\s+/g, '_')}_${langTab}`
+  const cls = "w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200"
+  const sty = { color: 'var(--text-primary)', border: '1px solid var(--border)', caretColor: 'var(--accent-fire)', background: 'var(--bg-tertiary)' }
+
+  return (
+    <div>
+      <label htmlFor={inputId} className="block text-xs font-medium mb-1.5 flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
+        {label} {suffix && <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>{suffix}</span>}
+      </label>
+      {as === 'textarea' ? (
+        <textarea id={inputId} value={value || ''} onChange={e => onChange(fieldKey, e.target.value)}
+          rows={rows || 3} dir={isAr ? 'rtl' : 'ltr'}
+          className={`${cls} resize-none`} style={sty}
+          onFocus={e => e.target.style.borderColor = 'rgba(195,74,54,0.4)'}
+          onBlur={e => e.target.style.borderColor = 'var(--border)'}
+        />
+      ) : (
+        <input id={inputId} value={value || ''} onChange={e => onChange(fieldKey, e.target.value)}
+          placeholder={placeholder} dir={isAr ? 'rtl' : 'ltr'}
+          className={cls} style={sty}
+          onFocus={e => e.target.style.borderColor = 'rgba(195,74,54,0.4)'}
+          onBlur={e => e.target.style.borderColor = 'var(--border)'}
+        />
+      )}
+    </div>
+  )
+}
+
+function ArrayInput({ listKey, inputKey, placeholder, items, inputVal, isAr, lang, onAdd, onRemove, onInputChange }) {
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-2 min-h-[28px]">
+        {(items || []).map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg transition-all"
+            style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>
+            <span dir={isAr ? 'rtl' : 'ltr'}>{item}</span>
+            <button type="button" onClick={() => onRemove(listKey, i)} className="hover:opacity-60 transition-opacity"><X size={10} /></button>
+          </span>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <input value={inputVal || ''}
+          onChange={e => onInputChange(inputKey, e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); onAdd(listKey, inputVal, inputKey) } }}
+          placeholder={placeholder} dir={isAr ? 'rtl' : 'ltr'}
+          className="flex-1 px-4 py-2 rounded-xl text-sm outline-none transition-all"
+          style={{ color: 'var(--text-primary)', border: '1px solid var(--border)', background: 'var(--bg-tertiary)' }}
+        />
+        <button type="button" onClick={() => onAdd(listKey, inputVal, inputKey)}
+          className="px-3 py-2 rounded-xl text-xs font-medium transition-all"
+          style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>
+          {lang === 'ar' ? 'إضافة' : 'Add'}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function Section({ title, subtitle, children }) {
+  return (
+    <div className="rounded-xl p-5" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+      <div className="mb-4">
+        <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{title}</h3>
+        {subtitle && <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>}
+      </div>
+      {children}
+    </div>
+  )
+}
+
 export default function ProjectForm() {
   const { id } = useParams()
   const isEdit = !!id
@@ -142,77 +213,6 @@ export default function ProjectForm() {
 
   const isAr = langTab === LANG.AR
 
-  function Field({ label, fieldKey, placeholder, as, rows, suffix }) {
-    const inputId = `${label.toLowerCase().replace(/\s+/g, '_')}_${langTab}`
-    const cls = "w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200"
-    const sty = { color: 'var(--text-primary)', border: '1px solid var(--border)', caretColor: 'var(--accent-fire)', background: 'var(--bg-tertiary)' }
-
-    return (
-      <div>
-        <label htmlFor={inputId} className="block text-xs font-medium mb-1.5 flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-          {label} {suffix && <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>{suffix}</span>}
-        </label>
-        {as === 'textarea' ? (
-          <textarea id={inputId} value={form[fieldKey] || ''} onChange={e => update(fieldKey, e.target.value)}
-            rows={rows || 3} dir={isAr ? 'rtl' : 'ltr'}
-            className={`${cls} resize-none`} style={sty}
-            onFocus={e => e.target.style.borderColor = 'rgba(195,74,54,0.4)'}
-            onBlur={e => e.target.style.borderColor = 'var(--border)'}
-          />
-        ) : (
-          <input id={inputId} value={form[fieldKey] || ''} onChange={e => update(fieldKey, e.target.value)}
-            placeholder={placeholder} dir={isAr ? 'rtl' : 'ltr'}
-            className={cls} style={sty}
-            onFocus={e => e.target.style.borderColor = 'rgba(195,74,54,0.4)'}
-            onBlur={e => e.target.style.borderColor = 'var(--border)'}
-          />
-        )}
-      </div>
-    )
-  }
-
-  function ArrayInput({ listKey, inputKey, placeholder }) {
-    return (
-      <div>
-        <div className="flex flex-wrap gap-2 mb-2 min-h-[28px]">
-          {(form[listKey] || []).map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg transition-all"
-              style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>
-              <span dir={isAr ? 'rtl' : 'ltr'}>{item}</span>
-              <button type="button" onClick={() => removeItem(listKey, i)} className="hover:opacity-60 transition-opacity"><X size={10} /></button>
-            </span>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <input value={inputs[inputKey] || ''}
-            onChange={e => setInputs(prev => ({ ...prev, [inputKey]: e.target.value }))}
-            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addItem(listKey, inputs[inputKey], inputKey) } }}
-            placeholder={placeholder} dir={isAr ? 'rtl' : 'ltr'}
-            className="flex-1 px-4 py-2 rounded-xl text-sm outline-none transition-all"
-            style={{ color: 'var(--text-primary)', border: '1px solid var(--border)', background: 'var(--bg-tertiary)' }}
-          />
-          <button type="button" onClick={() => addItem(listKey, inputs[inputKey], inputKey)}
-            className="px-3 py-2 rounded-xl text-xs font-medium transition-all"
-            style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>
-            {lang === 'ar' ? 'إضافة' : 'Add'}
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  function Section({ title, subtitle, children }) {
-    return (
-      <div className="rounded-xl p-5" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
-        <div className="mb-4">
-          <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{title}</h3>
-          {subtitle && <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>}
-        </div>
-        {children}
-      </div>
-    )
-  }
-
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center gap-4 mb-6">
@@ -284,7 +284,7 @@ export default function ProjectForm() {
           <Section title="English Content" subtitle="Fill in the project details in English">
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Project Name *" fieldKey="name" placeholder="Rent Go" />
+                <Field label="Project Name *" fieldKey="name" placeholder="Rent Go" value={form.name} onChange={update} isAr={isAr} langTab={langTab} />
                 <div>
                   <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>Tag</label>
                   <select value={form.tag} onChange={e => update('tag', e.target.value)}
@@ -295,21 +295,21 @@ export default function ProjectForm() {
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Project URL" fieldKey="url" placeholder="https://..." />
-                <Field label="Alt Text (SEO)" fieldKey="alt" placeholder="Project screenshot description" />
+                <Field label="Project URL" fieldKey="url" placeholder="https://..." value={form.url} onChange={update} isAr={isAr} langTab={langTab} />
+                <Field label="Alt Text (SEO)" fieldKey="alt" placeholder="Project screenshot description" value={form.alt} onChange={update} isAr={isAr} langTab={langTab} />
               </div>
-              <Field label="Description" fieldKey="description" as="textarea" />
+              <Field label="Description" fieldKey="description" as="textarea" value={form.description} onChange={update} isAr={isAr} langTab={langTab} />
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>What We Did</label>
-                <ArrayInput listKey="what_we_did" inputKey="what_we_did" placeholder="Add item and press Enter" />
+                <ArrayInput listKey="what_we_did" inputKey="what_we_did" placeholder="Add item and press Enter" items={form.what_we_did} inputVal={inputs.what_we_did} isAr={isAr} lang={lang} onAdd={addItem} onRemove={removeItem} onInputChange={(key, val) => setInputs(prev => ({ ...prev, [key]: val }))} />
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>Key Features</label>
-                <ArrayInput listKey="features" inputKey="features" placeholder="Add feature and press Enter" />
+                <ArrayInput listKey="features" inputKey="features" placeholder="Add feature and press Enter" items={form.features} inputVal={inputs.features} isAr={isAr} lang={lang} onAdd={addItem} onRemove={removeItem} onInputChange={(key, val) => setInputs(prev => ({ ...prev, [key]: val }))} />
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>Technologies</label>
-                <ArrayInput listKey="tech" inputKey="tech" placeholder="Add technology and press Enter" />
+                <ArrayInput listKey="tech" inputKey="tech" placeholder="Add technology and press Enter" items={form.tech} inputVal={inputs.tech} isAr={isAr} lang={lang} onAdd={addItem} onRemove={removeItem} onInputChange={(key, val) => setInputs(prev => ({ ...prev, [key]: val }))} />
               </div>
             </div>
           </Section>
@@ -325,20 +325,20 @@ export default function ProjectForm() {
                 </button>
                 <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>باستخدام Google Translate</span>
               </div>
-              <Field label="اسم المشروع" fieldKey="name_ar" suffix="Arabic" />
-              <Field label="النص البديل" fieldKey="alt_ar" suffix="Arabic" />
-              <Field label="الوصف" fieldKey="description_ar" as="textarea" suffix="Arabic" />
+              <Field label="اسم المشروع" fieldKey="name_ar" suffix="Arabic" value={form.name_ar} onChange={update} isAr={isAr} langTab={langTab} />
+              <Field label="النص البديل" fieldKey="alt_ar" suffix="Arabic" value={form.alt_ar} onChange={update} isAr={isAr} langTab={langTab} />
+              <Field label="الوصف" fieldKey="description_ar" as="textarea" suffix="Arabic" value={form.description_ar} onChange={update} isAr={isAr} langTab={langTab} />
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>
                   ما قمنا به <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>Arabic</span>
                 </label>
-                <ArrayInput listKey="what_we_did_ar" inputKey="what_we_did_ar" placeholder="أضف عنصرًا واضغط Enter" />
+                <ArrayInput listKey="what_we_did_ar" inputKey="what_we_did_ar" placeholder="أضف عنصرًا واضغط Enter" items={form.what_we_did_ar} inputVal={inputs.what_we_did_ar} isAr={isAr} lang={lang} onAdd={addItem} onRemove={removeItem} onInputChange={(key, val) => setInputs(prev => ({ ...prev, [key]: val }))} />
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-secondary)' }}>
                   المميزات الرئيسية <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(195,74,54,0.1)', color: 'var(--accent-fire)' }}>Arabic</span>
                 </label>
-                <ArrayInput listKey="features_ar" inputKey="features_ar" placeholder="أضف ميزة واضغط Enter" />
+                <ArrayInput listKey="features_ar" inputKey="features_ar" placeholder="أضف ميزة واضغط Enter" items={form.features_ar} inputVal={inputs.features_ar} isAr={isAr} lang={lang} onAdd={addItem} onRemove={removeItem} onInputChange={(key, val) => setInputs(prev => ({ ...prev, [key]: val }))} />
               </div>
             </div>
           </Section>
