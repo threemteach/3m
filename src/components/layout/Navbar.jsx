@@ -6,11 +6,7 @@ import NavControls from '../ui/NavControls.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
-<<<<<<< HEAD
-const sectionIds = ['hero', 'services', 'process', 'team', 'contact']
-=======
 const sectionIds = ['hero', 'services', 'about-page', 'process', 'contact']
->>>>>>> d3dc854 (fix: Arabic label OUR PHILOSOPHY -> فلسفتنا)
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
