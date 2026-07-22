@@ -6,16 +6,15 @@ import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
 import ScrollProgress from './components/ui/ScrollProgress.jsx'
-import CustomCursor from './components/ui/CustomCursor.jsx'
 import WhatsAppButton from './components/ui/WhatsAppButton.jsx'
 import SplashScreen from './components/ui/SplashScreen.jsx'
 import PageLoader from './components/ui/PageLoader.jsx'
 import Marquee from './components/sections/Marquee.jsx'
+import NoTemplates from './components/sections/NoTemplates.jsx'
 import Services from './components/sections/Services.jsx'
 import SectionDivider from './components/ui/SectionDivider.jsx'
 import Projects from './components/sections/Projects.jsx'
 import Process from './components/sections/Process.jsx'
-import Team from './components/sections/Team.jsx'
 import CTA from './components/sections/CTA.jsx'
 import StructuredData from './components/seo/StructuredData.jsx'
 import useSEO from './hooks/useSEO.js'
@@ -52,6 +51,7 @@ function Home() {
       <main>
         <Hero />
         <Marquee />
+        <NoTemplates />
         <SectionDivider />
         <Services />
         <SectionDivider />
@@ -59,8 +59,6 @@ function Home() {
         <SectionDivider flip />
         <Process />
         <SectionDivider />
-        <Team />
-        <SectionDivider flip />
         <CTA />
       </main>
     </PageWrap>
@@ -106,7 +104,6 @@ function App() {
           <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--accent-fire)', borderTopColor: 'transparent' }} />
         </div>
       }>
-        <CustomCursor />
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
@@ -128,7 +125,6 @@ function App() {
         {navigating && <PageLoader />}
       </AnimatePresence>
       <StructuredData />
-      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <AnimatePresence mode="wait">

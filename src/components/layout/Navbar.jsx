@@ -6,7 +6,11 @@ import NavControls from '../ui/NavControls.jsx'
 import useScrollSpy from '../../hooks/useScrollSpy.js'
 import { useTranslation } from '../../context/LanguageContext.jsx'
 
+<<<<<<< HEAD
 const sectionIds = ['hero', 'services', 'process', 'team', 'contact']
+=======
+const sectionIds = ['hero', 'services', 'about-page', 'process', 'contact']
+>>>>>>> d3dc854 (fix: Arabic label OUR PHILOSOPHY -> فلسفتنا)
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -53,12 +57,11 @@ export default function Navbar() {
   const effectiveActive = isProjectsPage ? 'work' : active
 
   const links = [
-    { id: 'services', label: t('nav.services'), page: false },
-    { id: 'about-page', label: t('nav.about'), page: true },
-    { id: 'process', label: t('nav.process'), page: false },
-    { id: 'team', label: t('nav.team'), page: false },
-    { id: 'contact', label: t('nav.contact'), page: false },
     { id: 'work', label: t('nav.work'), page: true },
+    { id: 'about-page', label: t('nav.about'), page: true },
+    { id: 'services', label: t('nav.services'), page: false },
+    { id: 'process', label: t('nav.process'), page: false },
+    { id: 'contact', label: t('nav.contact'), page: false },
   ]
 
   return (
@@ -81,18 +84,15 @@ export default function Navbar() {
             }}
           >
             <a href="/" className="flex items-center no-underline shrink-0">
-              <img src="/logos/Orange.svg" alt="3M tech — Digital Craftsmanship Studio" className="h-7 w-auto" />
+              <img src="/logos/Orange.svg" alt="3M tech — Software Development Company" className="h-7 w-auto" />
             </a>
 
-              <div className="hidden md:flex items-center gap-0">
+              <div className="hidden md:flex items-center gap-1 ml-4">
                 {links.map((l, i) => (
-                  <div key={l.id} className="flex items-center gap-0">
-                    {i > 0 && (
-                      <span className="mx-3 text-[10px]" style={{ color: 'var(--nav-text)', opacity: 0.3 }}>●</span>
-                    )}
                     <button
+                    key={l.id}
                     onClick={() => scrollTo(l.id)}
-                    className="group bg-transparent border-none cursor-pointer transition-colors duration-200"
+                    className="group bg-transparent border-none cursor-pointer transition-colors duration-200 px-2 py-1"
                     style={{
                       color: effectiveActive === l.id ? 'var(--accent-fire)' : 'var(--nav-text)',
                       fontSize: effectiveActive === l.id ? '14px' : '13px',
@@ -114,7 +114,6 @@ export default function Navbar() {
                       />
                     </span>
                   </button>
-                  </div>
                 ))}
               </div>
 
@@ -158,7 +157,7 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between h-16 px-6">
               <a href="/" className="flex items-center no-underline">
-                <img src="/logos/Orange.svg" alt="3M tech — Digital Craftsmanship Studio" className="h-7 w-auto" />
+                <img src="/logos/Orange.svg" alt="3M tech — Software Development Company" className="h-7 w-auto" />
               </a>
               <button onClick={() => setOpen(false)} className="bg-transparent border-none cursor-pointer p-2" aria-label="Close menu">
                 <X size={24} style={{ color: '#FFF7E9' }} />

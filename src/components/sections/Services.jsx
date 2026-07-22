@@ -88,8 +88,11 @@ export default function Services() {
                 <span className="hero-service-icon" style={{ background: `linear-gradient(135deg, ${s.accent}, color-mix(in srgb, ${s.accent} 60%, var(--accent-electric)))` }}>{s.icon}</span>
                 <h3 className="font-space font-semibold text-lg">{s.title}</h3>
               </div>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-sm leading-relaxed mb-2" style={{ color: 'var(--text-secondary)' }}>
                 {s.tagline}
+              </p>
+              <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--text-muted)' }}>
+                {s.desc}
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {s.tech.slice(0, 3).map(t => (
@@ -160,9 +163,30 @@ function ServiceModal({ service, onClose, lang }) {
         </div>
 
         <div className="p-6 md:p-8">
-          <p className="text-lg md:text-xl font-medium mb-8 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-lg md:text-xl font-medium mb-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             {service.tagline}
           </p>
+          <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            {service.desc}
+          </p>
+
+          <div className="mb-8">
+            <h4 className="text-xs font-semibold tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
+              {lang === 'en' ? 'Who This Is For' : 'مَن يستخدم هذه الخدمة'}
+            </h4>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              {service.audience}
+            </p>
+          </div>
+
+          <div className="mb-8">
+            <h4 className="text-xs font-semibold tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
+              {lang === 'en' ? 'Why 3M tech' : 'لماذا 3M tech'}
+            </h4>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              {service.whyUs}
+            </p>
+          </div>
 
           <div className="mb-8">
             <h4 className="text-xs font-semibold tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>

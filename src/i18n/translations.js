@@ -13,12 +13,15 @@ const en = {
   marquee: ['Web Apps', 'E-Commerce', 'Shopify', 'MVPs', 'UI/UX Design'],
   services: {
     label: 'WHAT WE DO',
-    heading: 'What We Build',
-    desc: "We focus on five things — and we do them properly.",
+    heading: 'Web Development & Design Services',
+    desc: "From custom web apps to e-commerce platforms and MVPs — we build everything from scratch, designed uniquely for your business.",
     list: [
       {
         title: 'Web Apps',
         tagline: 'Custom web applications and dashboards that run a real part of your business — booking systems, internal tools, customer portals.',
+        desc: 'We build custom web applications tailored to your exact workflow — designed from scratch, never from templates. From internal dashboards to customer-facing portals, every screen is crafted around how your team actually works.',
+        audience: 'Businesses that outgrown spreadsheets, agencies managing multiple clients, clinics, real-estate firms, and any team that needs a tool built around their specific process.',
+        whyUs: 'We build with React and Supabase — a modern stack that any developer can pick up later. Fixed-scope sprints with clear pricing before we start, so there are never any surprises.',
         benefits: [
           'Real backend with Supabase — auth, database, role-based access',
           'Built around your actual workflow, not a generic template',
@@ -38,6 +41,9 @@ const en = {
       {
         title: 'E-Commerce',
         tagline: 'Custom online stores built around how you actually sell — not limited to a single platform\'s rules.',
+        desc: 'We build custom e-commerce platforms from scratch — every page designed from scratch for your brand. From product catalogs to checkout flows, nothing is pre-built — everything matches how you sell and how your customers buy.',
+        audience: 'Egyptian and Middle Eastern businesses that need more than Shopify can offer — custom pricing, unique catalogs, or deep integration with existing systems.',
+        whyUs: 'We use Paymob and Stripe for payments, Supabase for the backend, and design every checkout flow around the Egyptian market — mobile-first, Arabic-ready, and optimized for local payment methods.',
         benefits: [
           'Custom checkout and product logic when templates fall short',
           'Real backend with Supabase for inventory, orders, and customers',
@@ -57,6 +63,9 @@ const en = {
       {
         title: 'Shopify',
         tagline: 'A professional Shopify store, set up properly and ready to sell fast.',
+        desc: 'We design custom Shopify themes from scratch — no stock templates, no recoloring. Every store is built around your brand identity, product catalog, and customer experience. Ready to sell in 1-2 weeks.',
+        audience: 'Businesses and entrepreneurs who want to launch fast on a proven platform — ideal for physical products, digital goods, or brands entering e-commerce for the first time.',
+        whyUs: 'We handle everything end-to-end: custom theme design, product setup, payment and shipping configuration for the Egyptian market. Most stores are ready to sell within 1-2 weeks.',
         benefits: [
           'Custom theme design — not a generic Shopify template',
           'Products, cart, and checkout configured end-to-end',
@@ -75,7 +84,10 @@ const en = {
       },
       {
         title: 'MVPs',
-        tagline: "Turn your idea into a working first product fast — with a real backend, not just a clickable mockup.",
+        tagline: 'From idea to a working product in weeks — real backend with authentication, database, and storage, not just a clickable prototype.',
+        desc: 'We build MVPs from scratch — designed around your vision, not a pre-built framework. A working product with authentication, database, and storage, delivered in weeks so you can test with real users or present to investors.',
+        audience: 'Startup founders, entrepreneurs, and early-stage teams who need to validate an idea, attract investors, or onboard first users before committing to a full build.',
+        whyUs: 'We define the exact features needed for your V1 and build them fast with Supabase. Fixed-scope, fixed-price sprints so you know exactly what you are getting before we start.',
         benefits: [
           'Real backend with Supabase — auth, database, file storage',
           'A working first version in weeks, not months',
@@ -95,6 +107,9 @@ const en = {
       {
         title: 'UI/UX Design',
         tagline: 'Interfaces that look sharp and feel effortless to use.',
+        desc: 'We design digital experiences from scratch — every interface crafted uniquely for your brand. From landing pages to complex web applications, nothing is pre-built — every pixel is designed mobile-first based on user research and your business goals.',
+        audience: 'Businesses that already have a developer but need professional design, startups preparing for launch, or teams that want to refresh their product UI without a full redesign.',
+        whyUs: 'Our designs are not just visually polished — they are built around user behavior and business goals. Clean Figma handoff means any developer can pick up and build without friction.',
         benefits: [
           'Custom design — never copy-pasted from a template library',
           'A consistent design system across every screen',
@@ -122,7 +137,7 @@ const en = {
   process: {
     label: 'HOW WE WORK', heading: 'Our Process',
     steps: [
-      { title: 'Discovery', desc: 'We get clear on your business, your goals, and what your site or app actually needs to do — no generic templates.' },
+      { title: 'Discovery', desc: 'We get clear on your business, your goals, and what your site or app actually needs to do — no pre-built solutions, no cookie-cutter approaches.' },
       { title: 'Design', desc: 'Wireframes and custom UI/UX mockups. You see and approve the design before a single line of code is written.' },
       { title: 'Development', desc: 'We build in focused stages and check in with you regularly — not silence for weeks at a time.' },
       { title: 'Launch & Beyond', desc: 'We launch your site or app, and stay reachable for fixes and updates after.' },
@@ -158,12 +173,15 @@ const ar = {
   },
   marquee: ['تطبيقات ويب', 'تجارة إلكترونية', 'Shopify', 'MVP', 'تصميم واجهات'],
   services: {
-    label: 'ماذا نفعل', heading: 'فيما نتخصص',
-    desc: 'نركّز على خمس خدمات فقط، ونتقنها بعناية.',
+    label: 'ماذا نفعل',     heading: 'خدمات تطوير الويب والتصميم',
+    desc: 'من تطبيقات الويب المخصصة إلى متاجر التجارة الإلكترونية ونماذج MVP — نبني كل شيء من الصفر، مصمم بشكل فريد لشركتك.',
     list: [
       {
         title: 'تطبيقات ويب',
         tagline: 'تطبيقات وويب ولوحات تحكم مخصصة تدير جزءًا حقيقيًا من عملك — أنظمة حجز، أدوات داخلية، بوابات عملاء.',
+        desc: 'نبني تطبيقات ويب مخصصة تتناسب تمامًا مع طريقة عملك — مصممة من الصفر، لا من القوالب. من لوحات التحكم الداخلية إلى بوابات العملاء، كل شاشة مصممة حول طريقة عمل فريقك الحقيقية.',
+        audience: 'شركات تجاوزت ملفات Excel، وكالات إدارة عملاء متعددين، عيادات، شركات عقارات، وأي فريق يحتاج أداة مبنية خصيصًا لعملياته.',
+        whyUs: 'نبني باستخدام React وSupabase — تقنيات حديثة يستطيع أي مطور التعامل معها لاحقًا. سبرنتات بنطاق عمل ثابت مع سعر واضح قبل البدء.',
         benefits: [
           'باك إند حقيقي عبر Supabase — تسجيل دخول، قاعدة بيانات، صلاحيات حسب الدور',
           'مبني حول طريقة عملك الفعلية، وليس قالبًا عامًا',
@@ -183,6 +201,9 @@ const ar = {
       {
         title: 'تجارة إلكترونية',
         tagline: 'متاجر إلكترونية مخصصة مبنية حسب طريقة بيعك الفعلية — مش محدودة بقواعد منصة واحدة.',
+        desc: 'نبني منصات تجارة إلكترونية من الصفر — كل صفحة مصممة من الصفر لعلامتك التجارية. من كتالوجات المنتجات إلى تدفقات الدفع، لا شيء مُبنى مسبقاً — كل شيء يتطابق مع طريقة بيعك وطريقة شراء عملائك.',
+        audience: 'شركات مصرية وشرق أوسطية تحتاج أكثر مما Shopify يوفره — تسعير مخصص، كتالوجات فريدة، أو تكامل عميق مع أنظمة قائمة.',
+        whyUs: 'نستخدم Paymob وStripe للدفع، Supabase للباك إند، ونصمم كل تدفق دفع حول السوق المصري — أولًا للموبايل، جاهز بالعربية، ومُحسّن لطرق الدفع المحلية.',
         benefits: [
           'منطق دفع ومنتجات مخصص لما القوالب الجاهزة متبقاش كافية',
           'باك إند حقيقي عبر Supabase للمخزون والطلبات والعملاء',
@@ -202,6 +223,9 @@ const ar = {
       {
         title: 'Shopify',
         tagline: 'متجر Shopify احترافي، مُجهّز صح وجاهز يبيع بسرعة.',
+        desc: 'نصمم ثيمات Shopify مخصصة من الصفر — لا قوالب جاهزة، لا إعادة تلوين. كل متجر مبني حول هويتك التجارية وكتالوج منتجاتك وتجربة العميل. جاهز للبيع خلال 1-2 أسبوع.',
+        audience: 'شركات ورواد أعمال يريدون إطلاق متجر بسرعة على منصة مُجرّبة — مثالي للمنتجات الفعلية أو الرقمية أو العلامات التجارية الداخلة سوق التجارة الإلكترونية لأول مرة.',
+        whyUs: 'نتولى كل شيء من البداية للنهاية: تصميم ثيم مخصص، إعداد المنتجات، تكوين الدفع والشحن للسوق المصري. أغلب المتاجر بتبقى جاهزة للبيع خلال أسبوع لأسبوعين.',
         benefits: [
           'تصميم ثيم مخصص — وليس قالب Shopify عام',
           'إعداد المنتجات والسلة والدفع من الألف للياء',
@@ -220,7 +244,10 @@ const ar = {
       },
       {
         title: 'MVP وتطبيقات أولية',
-        tagline: 'نحوّل فكرتك إلى منتج أولي شغال بسرعة — بباك إند حقيقي، وليس مجرد نموذج للعرض.',
+        tagline: 'من الفكرة إلى منتج يعمل في أسابيع — باك إند حقيقي مع مصادقة وقاعدة بيانات وتخزين ملفات، مش مجرد نموذج تفاعلي.',
+        desc: 'نبني نماذج أولية من الصفر — مصممة حول رؤيتك، وليس إطار عمل مُبنى مسبقاً. منتج شغال مع تسجيل دخول وقاعدة بيانات وتخزين ملفات، يُسلّم خلال أسابيع لتختبره مع مستخدمين حقيقيين أو تُقدمه للمستثمرين.',
+        audience: 'رواد أعمال وفرق في المرحلة المبكرة يحتاجون التحقق من فكرة، أو جذب مستثمرين، أو بدء أول مستخدمين قبل البناء الكامل.',
+        whyUs: 'نحدد الميزات الضرورية للنسخة الأولى ونبنيها بسرعة باستخدام Supabase. سبرنتات بنطاق وسعر ثابت حتى تعرف بالضبط ما تحصل عليه قبل البدء.',
         benefits: [
           'باك إند حقيقي عبر Supabase — تسجيل دخول، قاعدة بيانات، تخزين ملفات',
           'نسخة أولى شغالة خلال أسابيع، وليس شهورًا',
@@ -233,13 +260,16 @@ const ar = {
           { step: 'البناء', desc: 'واجهة أمامية + باك إند Supabase، مع متابعة دورية.' },
           { step: 'الإطلاق', desc: 'منتج شغال فعليًا تقدر تعرضه على مستخدمين حقيقيين أو مستثمرين.' },
         ],
-        useCase: 'مناسب للفاوندرز اللي محتاجين يوروا حاجة حقيقية — لمستثمر أو أول عملاء — مش عرض تقديمي تاني.',
+        useCase: 'مناسب للفاوندرز اللي محتاجين يوروا حاجة حقيقية — لمستثمرين أو أول عملاء — مش عرض تقديمي تاني.',
         cta: 'ابدأ MVP بتاعك',
         tech: ['React', 'Next.js', 'Supabase', 'Tailwind CSS'],
       },
       {
         title: 'تصميم واجهات (UI/UX)',
         tagline: 'واجهات بمظهر احترافي وسهلة الاستخدام بدون مجهود.',
+        desc: 'نصمم تجارب رقمية من الصفر — كل واجهة مصممة بشكل فريد لعلامتك التجارية. من صفحات الهبوط إلى تطبيقات الويب المعقدة، لا شيء مُبنى مسبقاً — كل بكسل مصمم أولًا للموبايل بناءً على بحث المستخدم وأهدافك التجارية.',
+        audience: 'شركات لديها مطور بالفعل وتحتاج تصميمًا احترافيًا، أو مشاريع في مرحلة الإطلاق، أو فرق تريد تحديث واجهة منتجها بدون إعادة تصميم كاملة.',
+        whyUs: 'تصاميمنا ليست جميلة فحسب — بل مبنية حول سلوك المستخدم والأهداف التجارية. تسليم Figma نظيف وواضح يعني أن أي مطور يستطيع البناء بدون احتكاك.',
         benefits: [
           'تصميم مخصص — وليس منسوخًا من مكتبة قوالب',
           'نظام تصميم متسق عبر كل الشاشات',
@@ -267,7 +297,7 @@ const ar = {
   process: {
     label: 'كيف نعمل', heading: 'منهجية العمل',
     steps: [
-      { title: 'اكتشاف', desc: 'نتعرّف بدقة على عملك وأهدافك وما يحتاجه موقعك أو تطبيقك فعليًا — بدون قوالب جاهزة.' },
+      { title: 'اكتشاف', desc: 'نتعرّف بدقة على عملك وأهدافك وما يحتاجه موقعك أو تطبيقك فعليًا — لا حلول جاهزة، لا نهج متسقق.' },
       { title: 'تصميم', desc: 'إطارات ونماذج تصميم مخصصة. ترى وتوافق على التصميم قبل كتابة أي سطر كود.' },
       { title: 'تطوير', desc: 'نبني على مراحل واضحة ونتواصل معك بانتظام — وليس صمتًا لأسابيع.' },
       { title: 'إطلاق وما بعده', desc: 'نطلق موقعك أو تطبيقك، ونبقى متاحين للتعديلات والتحديثات بعد ذلك.' },

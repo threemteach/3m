@@ -126,7 +126,7 @@ const faqPage = {
       name: 'What does 3M tech do?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '3M tech is a digital studio in Egypt that builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.',
+        text: '3M tech is a software development company in Egypt that builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.',
       },
     },
     {

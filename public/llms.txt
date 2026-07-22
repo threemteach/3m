@@ -1,6 +1,6 @@
 # 3M tech
 
-> 3M tech is a digital craftsmanship studio based in Egypt that builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.
+> 3M tech is a software development company based in Egypt that builds custom web applications, Shopify stores, e-commerce platforms, MVPs, and UI/UX designs for startups and businesses in Egypt and the Middle East.
 
 ## About
 
